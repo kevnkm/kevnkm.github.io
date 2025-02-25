@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/kevinkmkim.github.io/static/css/main.44dfe762.css",
-    "main.js": "/kevinkmkim.github.io/static/js/main.b71144b7.js",
-    "static/js/453.0cc0ac16.chunk.js": "/kevinkmkim.github.io/static/js/453.0cc0ac16.chunk.js",
-    "static/media/memoji_laptop.png": "/kevinkmkim.github.io/static/media/memoji_laptop.a230e22e48744471ed2c.png",
-    "index.html": "/kevinkmkim.github.io/index.html",
-    "main.44dfe762.css.map": "/kevinkmkim.github.io/static/css/main.44dfe762.css.map",
-    "main.b71144b7.js.map": "/kevinkmkim.github.io/static/js/main.b71144b7.js.map",
-    "453.0cc0ac16.chunk.js.map": "/kevinkmkim.github.io/static/js/453.0cc0ac16.chunk.js.map"
+    "main.css": "/static/css/main.44dfe762.css",
+    "main.js": "/static/js/main.36fcf354.js",
+    "static/js/453.0cc0ac16.chunk.js": "/static/js/453.0cc0ac16.chunk.js",
+    "static/media/memoji_laptop.png": "/static/media/memoji_laptop.a230e22e48744471ed2c.png",
+    "index.html": "/index.html",
+    "main.44dfe762.css.map": "/static/css/main.44dfe762.css.map",
+    "main.36fcf354.js.map": "/static/js/main.36fcf354.js.map",
+    "453.0cc0ac16.chunk.js.map": "/static/js/453.0cc0ac16.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.44dfe762.css",
-    "static/js/main.b71144b7.js"
+    "static/js/main.36fcf354.js"
   ]
 }
