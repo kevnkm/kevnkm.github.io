@@ -17,12 +17,24 @@ function App() {
               Kevin Kim
             </span>
           </div>
+        </div>
+      </nav>
 
+      <div className="flex flex-1 justify-center items-center space-x-8">
+        <div className="flex flex-col space-y-4">
+          <a
+            href="https://www.pixelcombine.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline text-blue-500 text-lg text-center"
+          >
+            Pixel Combine
+          </a>
           <a
             href="https://kevinkmkim.github.io/GraphicsHub/"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:underline"
+            className="hover:underline text-blue-500 text-lg text-center"
           >
             GraphicsHub
           </a>
@@ -30,7 +42,7 @@ function App() {
             href="https://github.com/kevinkmkim"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:underline"
+            className="hover:underline text-blue-500 text-lg text-center"
           >
             GitHub
           </a>
@@ -38,12 +50,12 @@ function App() {
             href="https://www.linkedin.com/in/kevinkmkim/"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:underline"
+            className="hover:underline text-blue-500 text-lg text-center"
           >
             LinkedIn
           </a>
         </div>
-      </nav>
+      </div>
     </div>
   );
 }
