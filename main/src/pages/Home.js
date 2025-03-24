@@ -23,12 +23,12 @@ function Home() {
       <div className="flex flex-1 justify-center items-center space-x-8">
         <div className="flex flex-col space-y-4">
           <a
-            href="https://www.pixelcombine.com/"
+            href="https://www.cubeloom.com/"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:underline text-blue-500 text-lg text-center"
           >
-            Pixel Combine
+            Cubeloom
           </a>
           <a
             href="https://kevinkmkim.github.io/GraphicsHub/"
