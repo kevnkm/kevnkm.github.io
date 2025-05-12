@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 
 const Home: React.FC = () => {
     return (
-        <div className="h-screen bg-white flex flex-col overflow-hidden">
-            <nav className="bg-white p-4 h-16 flex-shrink-0">
+        <div className="min-h-screen bg-white flex flex-col">
+            <nav className="bg-white p-4 h-16">
                 <div className="container mx-auto flex justify-between items-center h-full px-4">
                     <Link to="/" className="flex items-center">
                         <img
@@ -21,7 +21,7 @@ const Home: React.FC = () => {
                 </div>
             </nav>
 
-            <div className="flex flex-1 justify-center items-center space-x-8 overflow-hidden">
+            <div className="flex flex-1 justify-center items-center space-x-8">
                 <div className="flex flex-col space-y-4">
                     <a
                         href="https://www.cubeloom.com/"
