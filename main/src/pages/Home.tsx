@@ -1,6 +1,89 @@
 import React from "react";
 import logo from "../images/kevinkmkim_icon.png";
 import { Link } from "react-router-dom";
+import MasonryGrid from "../components/MasonryGrid";
+import type { MasonryItem } from "../components/MasonryCard";
+
+const tags = [
+    "Games",
+    "XR",
+    "Mobile",
+    "Web",
+    "Graphics",
+    "Research",
+    "VR",
+    "Desktop",
+    "Data",
+];
+
+const projectItems: MasonryItem[] = [
+    {
+        id: 0,
+        title: "Huetopia",
+        tags: [tags[0], tags[1]],
+        description: "Multiplayer XR tabletop strategy game",
+        link: "https://www.meta.com/experiences/26230755453235481/",
+        start: "2023",
+    },
+    {
+        id: 1,
+        title: "Arcadex",
+        tags: [tags[0], tags[1]],
+        description: "Compilation of XR arcade games",
+        link: "https://www.cubeloom.com/",
+        start: "2025",
+    },
+    {
+        id: 1,
+        title: "Tronhub",
+        tags: [tags[0], tags[1]],
+        description: "Virtual robot companions that teach physics",
+        link: "https://www.cubeloom.com/",
+        start: "2025",
+    },
+    {
+        id: 2,
+        title: "Wildfire",
+        tags: [tags[0], tags[2]],
+        description: "Designing impactful games for social good",
+        link: "https://github.com/games4cause/wildfire/",
+        start: "2025",
+    },
+    {
+        id: 3,
+        title: "GraphicsHub",
+        tags: [tags[4], tags[3]],
+        description: "Showcase of computer graphics demos",
+        link: "https://kevinkmkim.github.io/GraphicsHub/",
+        start: "2023",
+    },
+    {
+        id: 4,
+        title: "RosterTracker",
+        tags: [tags[8], tags[3]],
+        description: "Track and analyze sports rosters",
+        link: "https://kevinkmkim.github.io/RosterTracker/",
+        start: "2024",
+    },
+    {
+        id: 5,
+        title: "Apparel Design",
+        tags: [tags[5], tags[6], tags[7]],
+        description: "Apparel design education module",
+        link: "https://github.com/kevinkmkim/GarmentQuizDesktop",
+        start: "2022",
+        finish: "2022",
+    },
+    {
+        id: 6,
+        title: "OCD Simulator",
+        tags: [tags[5], tags[6], tags[7]],
+        description: "Simulation of OCD symptoms",
+        link: "https://github.com/kevinkmkim/OCDSimulationDesktop",
+        start: "2022",
+        finish: "2022",
+    },
+];
 
 const Home: React.FC = () => {
     return (
@@ -21,44 +104,11 @@ const Home: React.FC = () => {
                 </div>
             </nav>
 
-            <div className="flex flex-1 justify-center items-center space-x-8">
-                <div className="flex flex-col space-y-4">
-                    <a
-                        href="https://www.cubeloom.com/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:underline text-blue-500 text-lg text-center"
-                    >
-                        Cubeloom
-                    </a>
-                    <a
-                        href="https://games4cause.github.io/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:underline text-blue-500 text-lg text-center"
-                    >
-                        Games4Cause
-                    </a>
-                    <a
-                        href="https://kevinkmkim.github.io/GraphicsHub/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:underline text-blue-500 text-lg text-center"
-                    >
-                        GraphicsHub
-                    </a>
-                    <a
-                        href="https://kevinkmkim.github.io/RosterTracker/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:underline text-blue-500 text-lg text-center"
-                    >
-                        RosterTracker
-                    </a>
-                </div>
-            </div>
+            <main className="flex flex-1 justify-center items-start mt-8">
+                <MasonryGrid items={projectItems} />
+            </main>
 
-            <footer className="bg-gray-100 text-center text-gray-500 text-sm py-4">
+            <footer className="bg-gray-100 text-center text-gray-500 text-sm py-4 mt-auto">
                 <div className="flex flex-col sm:flex-row sm:justify-center sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
                     <div className="flex justify-center space-x-4">
                         <a
