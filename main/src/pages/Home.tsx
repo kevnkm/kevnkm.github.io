@@ -14,7 +14,7 @@ const Home: React.FC = () => {
                             className="h-6 w-auto"
                             draggable="false"
                         />
-                        <span className="text-xl font-bold font-dot-gothic-16 sm:inline ml-2">
+                        <span className="text-xl text-black font-bold font-dot-gothic-16 sm:inline ml-2">
                             Kevin Kim
                         </span>
                     </Link>
@@ -32,6 +32,14 @@ const Home: React.FC = () => {
                         Cubeloom
                     </a>
                     <a
+                        href="https://games4cause.github.io/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:underline text-blue-500 text-lg text-center"
+                    >
+                        Games4Cause
+                    </a>
+                    <a
                         href="https://kevinkmkim.github.io/GraphicsHub/"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -40,23 +48,41 @@ const Home: React.FC = () => {
                         GraphicsHub
                     </a>
                     <a
-                        href="https://github.com/kevinkmkim"
+                        href="https://kevinkmkim.github.io/RosterTracker/"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hover:underline text-blue-500 text-lg text-center"
                     >
-                        GitHub
-                    </a>
-                    <a
-                        href="https://www.linkedin.com/in/kevinkmkim/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:underline text-blue-500 text-lg text-center"
-                    >
-                        LinkedIn
+                        RosterTracker
                     </a>
                 </div>
             </div>
+
+            <footer className="bg-gray-100 text-center text-gray-500 text-sm py-4">
+                <div className="flex flex-col sm:flex-row sm:justify-center sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
+                    <div className="flex justify-center space-x-4">
+                        <a
+                            href="https://github.com/kevinkmkim"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:underline text-blue-500"
+                        >
+                            GitHub
+                        </a>
+                        <a
+                            href="https://www.linkedin.com/in/kevinkmkim/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:underline text-blue-500"
+                        >
+                            LinkedIn
+                        </a>
+                    </div>
+                    <div className="text-center sm:text-left">
+                        © {new Date().getFullYear()} Kevin Kim. All rights reserved.
+                    </div>
+                </div>
+            </footer>
         </div>
     );
 };
