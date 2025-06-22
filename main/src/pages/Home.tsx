@@ -50,7 +50,7 @@ const projectItems: MasonryItem[] = [
         link: "https://www.cubeloom.com/",
         start: "2025",
         images: Object.values(
-            import.meta.glob('/src/images/tronhub/*.{jpg,png}', { eager: true, import: 'default' })
+            import.meta.glob('/src/images/labbit/*.{jpg,png}', { eager: true, import: 'default' })
         ),
     },
     {
