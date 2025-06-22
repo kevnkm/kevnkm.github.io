@@ -14,6 +14,8 @@ const tags = [
     "VR",
     "Desktop",
     "Data",
+    "Education",
+    "Sports"
 ];
 
 const projectItems: MasonryItem[] = [
@@ -42,8 +44,8 @@ const projectItems: MasonryItem[] = [
     },
     {
         id: 2,
-        title: "Tronhub",
-        tags: [tags[0], tags[1]],
+        title: "Labbit",
+        tags: [tags[0], tags[1], tags[9]],
         description: "Virtual robot companions that teach physics",
         link: "https://www.cubeloom.com/",
         start: "2025",
@@ -76,7 +78,7 @@ const projectItems: MasonryItem[] = [
     {
         id: 5,
         title: "RosterTracker",
-        tags: [tags[8], tags[3]],
+        tags: [tags[8], tags[3], tags[10]],
         description: "Track and analyze sports rosters",
         link: "https://kevinkmkim.github.io/RosterTracker/",
         start: "2024",
