@@ -33,6 +33,18 @@ const projectItems: MasonryItem[] = [
     },
     {
         id: 1,
+        title: "Special Relativity",
+        tags: [tags[6], tags[9]],
+        description: "Dialogue-based VR learning module on special relativity",
+        link: "https://github.com/kevinkmkim/SpecialRelativity/",
+        start: "2025",
+        finish: "2025",
+        images: Object.values(
+            import.meta.glob('/src/images/specialrelativity/*.{jpg,png}', { eager: true, import: 'default' })
+        ),
+    },
+    {
+        id: 1,
         title: "Arcadex",
         tags: [tags[0], tags[1]],
         description: "Compilation of XR arcade games",
@@ -46,7 +58,7 @@ const projectItems: MasonryItem[] = [
         id: 2,
         title: "Labbit",
         tags: [tags[0], tags[1], tags[9]],
-        description: "Virtual robot companions that teach physics",
+        description: "Gamified learning app for physics",
         link: "https://www.cubeloom.com/",
         start: "2025",
         images: Object.values(
