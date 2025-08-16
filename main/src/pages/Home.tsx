@@ -36,7 +36,7 @@ const projectItems: MasonryItem[] = [
         title: "Special Relativity",
         tags: [tags[6], tags[9]],
         description: "Dialogue-based VR learning module on special relativity",
-        link: "https://github.com/kevinkmkim/SpecialRelativity/",
+        link: "https://github.com/kevinkmkim/special-relativity",
         start: "2025",
         finish: "2025",
         images: Object.values(
@@ -78,10 +78,10 @@ const projectItems: MasonryItem[] = [
     },
     {
         id: 4,
-        title: "GraphicsHub",
+        title: "Graphics Hub",
         tags: [tags[4], tags[3]],
         description: "Showcase of computer graphics demos",
-        link: "https://kevinkmkim.github.io/GraphicsHub/",
+        link: "https://kevinkmkim.github.io/graphics/",
         start: "2023",
         images: Object.values(
             import.meta.glob('/src/images/graphicshub/*.jpg', { eager: true, import: 'default' })
@@ -89,10 +89,10 @@ const projectItems: MasonryItem[] = [
     },
     {
         id: 5,
-        title: "RosterTracker",
+        title: "Roster Tracker",
         tags: [tags[8], tags[3], tags[10]],
         description: "Track and analyze sports rosters",
-        link: "https://kevinkmkim.github.io/RosterTracker/",
+        link: "https://kevinkmkim.github.io/rosters/",
         start: "2024",
         images: Object.values(
             import.meta.glob('/src/images/rostertracker/*.jpg', { eager: true, import: 'default' })
@@ -115,7 +115,7 @@ const projectItems: MasonryItem[] = [
         title: "OCD Simulator",
         tags: [tags[5], tags[6], tags[7]],
         description: "Simulation of OCD symptoms",
-        link: "https://github.com/kevinkmkim/OCDSimulationDesktop",
+        link: "https://github.com/kevinkmkim/ocd-simulation",
         start: "2022",
         finish: "2022",
         images: Object.values(
