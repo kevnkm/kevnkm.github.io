@@ -108,20 +108,22 @@ const projectItems: MasonryItem[] = [
         link: "https://github.com/kevinkmkim/GarmentQuizDesktop",
         start: "2022",
         finish: "2022",
+        height: 300,
         images: Object.values(
-            import.meta.glob('/src/images/appareldesign/*.jpg', { eager: true, import: 'default' })
+            import.meta.glob('/src/images/appareldesign/*.{gif,jpg,jpeg,png}', { eager: true, import: 'default' })
         ),
     },
     {
         id: 7,
-        title: "OCD Simulator",
+        title: "OCD Simulation",
         tags: [tags[5], tags[6], tags[7]],
         description: "Simulation of OCD symptoms",
         link: "https://github.com/kevinkmkim/ocd-simulation",
         start: "2022",
         finish: "2022",
+        height: 300,
         images: Object.values(
-            import.meta.glob('/src/images/ocdsimulator/*.jpg', { eager: true, import: 'default' })
+            import.meta.glob('/src/images/ocdsimulation/*.{gif,jpg,jpeg,png}', { eager: true, import: 'default' })
         ),
     },
 ];
