@@ -32,7 +32,7 @@ const projectItems: MasonryItem[] = [
         ),
     },
     {
-        id: 1,
+        id: 8,
         title: "Special Relativity",
         tags: [tags[6], tags[9]],
         description: "Dialogue-based VR learning module on special relativity",
