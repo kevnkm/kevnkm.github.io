@@ -145,7 +145,7 @@ const Home: React.FC = () => {
                 </div>
             </nav>
 
-            <main className="flex flex-1 justify-center items-start mt-8">
+            <main className="flex flex-1 justify-center items-start">
                 <MasonryGrid items={projectItems} />
             </main>
 
