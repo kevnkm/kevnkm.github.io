@@ -39,6 +39,7 @@ const projectItems: MasonryItem[] = [
         link: "https://github.com/kevinkmkim/special-relativity",
         start: "2025",
         finish: "2025",
+        height: 300,
         images: Object.values(
             import.meta.glob('/src/images/specialrelativity/*.{jpg,png}', { eager: true, import: 'default' })
         ),
