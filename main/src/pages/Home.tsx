@@ -61,6 +61,7 @@ const projectItems: MasonryItem[] = [
         description: "Gamified learning app for physics",
         link: "https://www.cubeloom.com/",
         start: "2025",
+        height: 300,
         images: Object.values(
             import.meta.glob('/src/images/labbit/*.{jpg,png}', { eager: true, import: 'default' })
         ),
