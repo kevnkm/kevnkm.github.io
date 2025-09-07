@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../images/kevinkmkim_icon.png";
+import logo from "../images/kevnkm_icon.png";
 import { Link } from "react-router-dom";
 import MasonryGrid from "../components/MasonryGrid";
 import type { MasonryItem } from "../components/MasonryCard";
@@ -36,7 +36,7 @@ const projectItems: MasonryItem[] = [
         title: "Special Relativity",
         tags: [tags[6], tags[9]],
         description: "Dialogue-based VR learning module on special relativity",
-        link: "https://github.com/kevinkmkim/special-relativity",
+        link: "https://github.com/kevnkm/special-relativity",
         start: "2025",
         finish: "2025",
         height: 300,
@@ -83,7 +83,7 @@ const projectItems: MasonryItem[] = [
         title: "Graphics Hub",
         tags: [tags[4], tags[3]],
         description: "Showcase of computer graphics demos",
-        link: "https://kevinkmkim.github.io/graphics/",
+        link: "https://kevnkm.github.io/graphics/",
         start: "2023",
         images: Object.values(
             import.meta.glob('/src/images/graphicshub/*.jpg', { eager: true, import: 'default' })
@@ -94,7 +94,7 @@ const projectItems: MasonryItem[] = [
         title: "Roster Tracker",
         tags: [tags[8], tags[3], tags[10]],
         description: "Track and analyze sports rosters",
-        link: "https://kevinkmkim.github.io/rosters/",
+        link: "https://kevnkm.github.io/rosters/",
         start: "2024",
         images: Object.values(
             import.meta.glob('/src/images/rostertracker/*.jpg', { eager: true, import: 'default' })
@@ -105,7 +105,7 @@ const projectItems: MasonryItem[] = [
         title: "Apparel Design",
         tags: [tags[5], tags[6], tags[7]],
         description: "Apparel design education module",
-        link: "https://github.com/kevinkmkim/GarmentQuizDesktop",
+        link: "https://github.com/kevnkm/GarmentQuizDesktop",
         start: "2022",
         finish: "2022",
         height: 300,
@@ -118,7 +118,7 @@ const projectItems: MasonryItem[] = [
         title: "OCD Simulation",
         tags: [tags[5], tags[6], tags[7]],
         description: "Simulation of OCD symptoms",
-        link: "https://github.com/kevinkmkim/ocd-simulation",
+        link: "https://github.com/kevnkm/ocd-simulation",
         start: "2022",
         finish: "2022",
         height: 300,
@@ -155,7 +155,7 @@ const Home: React.FC = () => {
                 <div className="flex flex-col sm:flex-row sm:justify-center sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
                     <div className="flex justify-center space-x-4">
                         <a
-                            href="https://github.com/kevinkmkim"
+                            href="https://github.com/kevnkm"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="hover:underline text-blue-500"
@@ -163,7 +163,7 @@ const Home: React.FC = () => {
                             GitHub
                         </a>
                         <a
-                            href="https://www.linkedin.com/in/kevinkmkim/"
+                            href="https://www.linkedin.com/in/kevnkm/"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="hover:underline text-blue-500"
