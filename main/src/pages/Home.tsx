@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../images/kevnkm_icon.png";
-import { Link } from "react-router-dom";
 import MasonryGrid from "../components/MasonryGrid";
+import StaggeredMenu from "../components/StaggeredMenu";
 import type { MasonryItem } from "../components/MasonryCard";
 
 const tags = [
@@ -128,26 +128,39 @@ const projectItems: MasonryItem[] = [
     },
 ];
 
+// Menu configuration
+const menuItems = [
+    { label: 'Home', ariaLabel: 'Go to home page', link: '/' },
+    { label: 'Projects', ariaLabel: 'View my projects', link: '/#projects' },
+    { label: 'About', ariaLabel: 'Learn about me', link: '/about' },
+    { label: 'Contact', ariaLabel: 'Get in touch', link: '/contact' }
+];
+
+const socialItems = [
+    { label: 'GitHub', link: 'https://github.com/kevnkm' },
+    { label: 'LinkedIn', link: 'https://www.linkedin.com/in/kevnkm/' }
+];
+
 const Home: React.FC = () => {
     return (
         <div className="min-h-screen bg-white flex flex-col">
-            <nav className="bg-white p-4 h-16">
-                <div className="container mx-auto flex justify-between items-center h-full px-4">
-                    <Link to="/" className="flex items-center">
-                        <img
-                            src={logo}
-                            alt="Logo"
-                            className="h-6 w-auto"
-                            draggable="false"
-                        />
-                        <span className="text-xl text-black font-bold font-dot-gothic-16 sm:inline ml-2">
-                            Kevin Kim
-                        </span>
-                    </Link>
-                </div>
-            </nav>
+            <StaggeredMenu
+                position="right"
+                items={menuItems}
+                socialItems={socialItems}
+                displaySocials={true}
+                displayItemNumbering={true}
+                menuButtonColor="#000"
+                openMenuButtonColor="#ff6b6b"
+                changeMenuColorOnOpen={true}
+                colors={['#B19EEF', '#5227FF']}
+                logoUrl={logo}
+                accentColor="#ff6b6b"
+                onMenuOpen={() => console.log('Menu opened')}
+                onMenuClose={() => console.log('Menu closed')}
+            />
 
-            <main className="flex flex-1 justify-center items-start">
+            <main className="flex flex-1 justify-center items-start pt-8" id="projects">
                 <MasonryGrid items={projectItems} />
             </main>
 
