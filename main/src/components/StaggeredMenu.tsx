@@ -1,3 +1,5 @@
+// main/src/components/StaggeredMenu.tsx
+
 import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import './StaggeredMenu.css';
