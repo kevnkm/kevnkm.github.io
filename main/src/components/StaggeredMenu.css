@@ -122,7 +122,7 @@
     top: 0;
     right: 0;
     width: clamp(260px, 38vw, 420px);
-    height: 100%;
+    height: 100vh;
     background: white;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
@@ -324,10 +324,6 @@
         left: 0;
         right: 0;
     }
-
-    .staggered-menu-wrapper[data-open] .sm-logo-img {
-        filter: invert(100%);
-    }
 }
 
 @media (max-width: 640px) {
@@ -335,9 +331,5 @@
         width: 100%;
         left: 0;
         right: 0;
-    }
-
-    .staggered-menu-wrapper[data-open] .sm-logo-img {
-        filter: invert(100%);
     }
 }
