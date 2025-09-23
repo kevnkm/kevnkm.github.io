@@ -144,21 +144,23 @@ const socialItems = [
 const Home: React.FC = () => {
     return (
         <div className="min-h-screen bg-white flex flex-col">
-            <StaggeredMenu
-                position="right"
-                items={menuItems}
-                socialItems={socialItems}
-                displaySocials={true}
-                displayItemNumbering={true}
-                menuButtonColor="#000"
-                openMenuButtonColor="#ff6b6b"
-                changeMenuColorOnOpen={true}
-                colors={['#B19EEF', '#5227FF']}
-                logoUrl={logo}
-                accentColor="#ff6b6b"
-                onMenuOpen={() => console.log('Menu opened')}
-                onMenuClose={() => console.log('Menu closed')}
-            />
+            <header className="relative z-50 h-16 flex items-center">
+                <StaggeredMenu
+                    position="right"
+                    items={menuItems}
+                    socialItems={socialItems}
+                    displaySocials={true}
+                    displayItemNumbering={true}
+                    menuButtonColor="#000"
+                    openMenuButtonColor="#ff6b6b"
+                    changeMenuColorOnOpen={true}
+                    colors={['#B19EEF', '#5227FF']}
+                    logoUrl={logo}
+                    accentColor="#ff6b6b"
+                    onMenuOpen={() => console.log('Menu opened')}
+                    onMenuClose={() => console.log('Menu closed')}
+                />
+            </header>
 
             <main className="flex flex-1 justify-center items-start pt-8" id="projects">
                 <MasonryGrid items={projectItems} />
