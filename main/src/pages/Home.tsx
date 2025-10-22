@@ -1,21 +1,6 @@
 import React from "react";
-import logo from "../images/kevnkm_icon.png";
 import Masonry from "../components/Masonry";
-import StaggeredMenu from "../components/StaggeredMenu";
-
-const tags = [
-    "Games",
-    "XR",
-    "Mobile",
-    "Web",
-    "Graphics",
-    "Research",
-    "VR",
-    "Desktop",
-    "Data",
-    "Education",
-    "Sports",
-];
+import Header from "../components/Header";
 
 const projectItems = [
     {
@@ -119,38 +104,10 @@ const projectItems = [
     },
 ];
 
-const menuItems = [
-    { label: "Home", ariaLabel: "Go to home page", link: "/" },
-    { label: "Projects", ariaLabel: "View my projects", link: "/#projects" },
-    { label: "About", ariaLabel: "Learn about me", link: "/about" },
-    { label: "Contact", ariaLabel: "Get in touch", link: "/contact" },
-];
-
-const socialItems = [
-    { label: "GitHub", link: "https://github.com/kevnkm" },
-    { label: "LinkedIn", link: "https://www.linkedin.com/in/kevnkm/" },
-];
-
 const Home: React.FC = () => {
     return (
         <div className="min-h-screen bg-white flex flex-col">
-            <header className="relative z-50 h-16 flex items-center">
-                <StaggeredMenu
-                    position="right"
-                    items={menuItems}
-                    socialItems={socialItems}
-                    displaySocials={true}
-                    displayItemNumbering={true}
-                    menuButtonColor="#000"
-                    openMenuButtonColor="#ff6b6b"
-                    changeMenuColorOnOpen={true}
-                    colors={["#B19EEF", "#5227FF"]}
-                    logoUrl={logo}
-                    accentColor="#ff6b6b"
-                    onMenuOpen={() => console.log("Menu opened")}
-                    onMenuClose={() => console.log("Menu closed")}
-                />
-            </header>
+            <Header />
 
             <main className="flex flex-1 justify-center items-start pt-8" id="projects">
                 <Masonry
