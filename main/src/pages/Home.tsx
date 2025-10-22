@@ -108,7 +108,7 @@ const Home: React.FC = () => {
     return (
         <div className="min-h-screen bg-white flex flex-col">
             <Header />
-            <main className="flex flex-1 justify-center items-start pt-24" id="projects">
+            <main className="flex flex-1 justify-center items-start pt-25" id="projects">
                 <Masonry
                     items={projectItems}
                     ease="power3.out"
