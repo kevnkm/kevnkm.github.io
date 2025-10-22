@@ -62,6 +62,11 @@ const Header = () => {
                         setIsMenuOpen(false);
                         console.log("Menu closed");
                     }}
+                    onLogoClick={() => {
+                        if (window.location.pathname !== "/") {
+                            window.location.href = "/";
+                        }
+                    }}
                     className="flex items-center w-full"
                 />
             </header>

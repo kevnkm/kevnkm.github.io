@@ -31,6 +31,7 @@ interface StaggeredMenuProps {
     changeMenuColorOnOpen?: boolean;
     onMenuOpen?: () => void;
     onMenuClose?: () => void;
+    onLogoClick?: () => void;
 }
 
 export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
@@ -47,7 +48,8 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     accentColor = '#5227FF',
     changeMenuColorOnOpen = true,
     onMenuOpen,
-    onMenuClose
+    onMenuClose,
+    onLogoClick,
 }) => {
     const [open, setOpen] = useState<boolean>(false);
     const openRef = useRef<boolean>(false);
@@ -362,7 +364,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                 })()}
             </div>
             <header className="staggered-menu-header" aria-label="Main navigation header">
-                <div className="sm-logo" aria-label="Logo">
+                <div className="sm-logo" aria-label="Logo" onClick={onLogoClick} style={{ cursor: 'pointer' }}>
                     <img
                         src={logoUrl || '/src/assets/logos/reactbits-gh-white.svg'}
                         alt="Logo"
