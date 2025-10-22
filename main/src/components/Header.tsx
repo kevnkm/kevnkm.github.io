@@ -1,0 +1,38 @@
+import React from "react";
+import StaggeredMenu from "./StaggeredMenu";
+import logo from "../images/kevnkm_icon.png";
+
+const menuItems = [
+    { label: "Home", ariaLabel: "View my projects", link: "/" },
+    { label: "About", ariaLabel: "Learn about me", link: "/about" },
+    { label: "Contact", ariaLabel: "Get in touch", link: "/contact" },
+];
+
+const socialItems = [
+    { label: "GitHub", link: "https://github.com/kevnkm" },
+    { label: "LinkedIn", link: "https://www.linkedin.com/in/kevnkm/" },
+];
+
+const Header: React.FC = () => {
+    return (
+        <header className="relative z-50 h-16 flex items-center">
+            <StaggeredMenu
+                position="right"
+                items={menuItems}
+                socialItems={socialItems}
+                displaySocials={true}
+                displayItemNumbering={true}
+                menuButtonColor="#000"
+                openMenuButtonColor="#ff6b6b"
+                changeMenuColorOnOpen={true}
+                colors={["#B19EEF", "#5227FF"]}
+                logoUrl={logo}
+                accentColor="#ff6b6b"
+                onMenuOpen={() => console.log("Menu opened")}
+                onMenuClose={() => console.log("Menu closed")}
+            />
+        </header>
+    );
+};
+
+export default Header;
