@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import StaggeredMenu from "./StaggeredMenu";
+import { useNavigate } from "react-router-dom";
 import logo from "../images/kevnkm_icon.png";
 
 const menuItems = [
@@ -17,6 +18,7 @@ const Header = () => {
     const [isVisible, setIsVisible] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -63,9 +65,7 @@ const Header = () => {
                         console.log("Menu closed");
                     }}
                     onLogoClick={() => {
-                        if (window.location.pathname !== "/") {
-                            window.location.href = "/";
-                        }
+                        navigate("/");
                     }}
                     className="flex items-center w-full"
                 />
