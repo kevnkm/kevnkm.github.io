@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import StaggeredMenu from "./StaggeredMenu";
 import logo from "../images/kevnkm_icon.png";
 
@@ -13,26 +13,64 @@ const socialItems = [
     { label: "LinkedIn", link: "https://www.linkedin.com/in/kevnkm/" },
 ];
 
-const Header: React.FC = () => {
+const Header = () => {
+    const [isVisible, setIsVisible] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+
+            if (currentScrollY > lastScrollY && currentScrollY > 50 && !isMenuOpen) {
+                // Scrolling down and menu is closed
+                setIsVisible(false);
+            } else if (currentScrollY < lastScrollY) {
+                // Scrolling up
+                setIsVisible(true);
+            }
+
+            setLastScrollY(currentScrollY);
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [lastScrollY, isMenuOpen]);
+
     return (
-        <header className="fixed top-0 left-0 w-full z-50 flex items-center justify-between h-25">
-            <StaggeredMenu
-                position="right"
-                items={menuItems}
-                socialItems={socialItems}
-                displaySocials={true}
-                displayItemNumbering={true}
-                menuButtonColor="#000"
-                openMenuButtonColor="#ff6b6b"
-                changeMenuColorOnOpen={true}
-                colors={["#B19EEF", "#5227FF"]}
-                logoUrl={logo}
-                accentColor="#ff6b6b"
-                onMenuOpen={() => console.log("Menu opened")}
-                onMenuClose={() => console.log("Menu closed")}
-                className="flex items-center w-full"
-            />
-        </header>
+        <>
+            <header
+                className={`fixed top-0 left-0 w-full z-100 flex items-center justify-between h-25 transition-transform duration-300 ${isVisible ? "translate-y-0" : "-translate-y-full"}`}
+            >
+                <StaggeredMenu
+                    position="right"
+                    items={menuItems}
+                    socialItems={socialItems}
+                    displaySocials={true}
+                    displayItemNumbering={true}
+                    menuButtonColor="#000"
+                    openMenuButtonColor="#ff6b6b"
+                    changeMenuColorOnOpen={true}
+                    colors={["#B19EEF", "#5227FF"]}
+                    logoUrl={logo}
+                    accentColor="#ff6b6b"
+                    onMenuOpen={() => {
+                        setIsMenuOpen(true);
+                        console.log("Menu opened");
+                    }}
+                    onMenuClose={() => {
+                        setIsMenuOpen(false);
+                        console.log("Menu closed");
+                    }}
+                    className="flex items-center w-full"
+                />
+            </header>
+            <div
+                className={`fixed inset-0 z-50 transition-all duration-500 ease-in-out ${isMenuOpen ? "backdrop-blur-md opacity-100" : "backdrop-blur-none opacity-0 pointer-events-none"
+                    }`}
+                aria-hidden="true"
+            ></div>
+        </>
     );
 };
 
