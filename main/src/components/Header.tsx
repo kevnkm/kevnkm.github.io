@@ -15,7 +15,7 @@ const socialItems = [
 
 const Header: React.FC = () => {
     return (
-        <header className="fixed top-0 left-0 w-full z-50 flex items-center justify-between bg-white">
+        <header className="fixed top-0 left-0 w-full z-50 flex items-center justify-between">
             <StaggeredMenu
                 position="right"
                 items={menuItems}
@@ -30,7 +30,7 @@ const Header: React.FC = () => {
                 accentColor="#ff6b6b"
                 onMenuOpen={() => console.log("Menu opened")}
                 onMenuClose={() => console.log("Menu closed")}
-                className="flex items-center w-full bg-white"
+                className="flex items-center w-full"
             />
         </header>
     );
