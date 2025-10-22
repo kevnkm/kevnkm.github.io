@@ -1,6 +1,6 @@
 // main/src/components/StaggeredMenu.tsx
 
-import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
+import React, { useCallback, useLayoutEffect, useRef, useState, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { Link } from "react-router-dom";
 import './StaggeredMenu.css';
@@ -63,7 +63,6 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     const textInnerRef = useRef<HTMLSpanElement | null>(null);
     const textWrapRef = useRef<HTMLSpanElement | null>(null);
     const [textLines, setTextLines] = useState<string[]>(['Menu', 'Close']);
-
     const openTlRef = useRef<gsap.core.Timeline | null>(null);
     const closeTweenRef = useRef<gsap.core.Tween | null>(null);
     const spinTweenRef = useRef<gsap.core.Tween | null>(null);
@@ -72,6 +71,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     const toggleBtnRef = useRef<HTMLButtonElement | null>(null);
     const busyRef = useRef<boolean>(false);
     const itemEntranceTweenRef = useRef<gsap.core.Tween | null>(null);
+    const wrapperRef = useRef<HTMLDivElement | null>(null);
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
@@ -346,8 +346,37 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         animateText(target);
     }, [playOpen, playClose, animateIcon, animateColor, animateText, onMenuOpen, onMenuClose]);
 
+    // Handle Escape key press and outside click
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Escape' && openRef.current) {
+                toggleMenu();
+            }
+        };
+
+        const handleOutsideClick = (event: MouseEvent) => {
+            const wrapper = wrapperRef.current;
+            if (!wrapper || !openRef.current) return;
+
+            const target = event.target as Node;
+            // Check if the click is outside the menu wrapper
+            if (!wrapper.contains(target)) {
+                toggleMenu();
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyDown);
+        document.addEventListener('click', handleOutsideClick);
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+            document.removeEventListener('click', handleOutsideClick);
+        };
+    }, [toggleMenu]);
+
     return (
         <div
+            ref={wrapperRef}
             className={(className ? className + ' ' : '') + 'staggered-menu-wrapper'}
             style={accentColor ? { ['--sm-accent' as string]: accentColor } : undefined}
             data-position={position}
@@ -400,7 +429,12 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                 </button>
             </header>
 
-            <aside id="staggered-menu-panel" ref={panelRef} className="staggered-menu-panel" aria-hidden={!open}>
+            <aside
+                id="staggered-menu-panel"
+                ref={panelRef}
+                className="staggered-menu-panel"
+                aria-hidden={!open}
+            >
                 <div className="sm-panel-inner">
                     <ul className="sm-panel-list" role="list" data-numbering={displayItemNumbering || undefined}>
                         {items && items.length ? (
@@ -415,7 +449,6 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                                     >
                                         <span className="sm-panel-itemLabel">{it.label}</span>
                                     </Link>
-
                                 </li>
                             ))
                         ) : (
