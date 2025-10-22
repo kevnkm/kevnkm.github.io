@@ -88,7 +88,7 @@ const projectItems = [
                 import: "default",
             })
         )[0],
-        url: "https://github.com/kevnkm/GarmentQuizDesktop",
+        url: "https://github.com/kevnkm/apparel-design",
         height: 500,
     },
     {
