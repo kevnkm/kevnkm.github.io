@@ -15,7 +15,7 @@ const socialItems = [
 
 const Header: React.FC = () => {
     return (
-        <header className="fixed top-0 left-0 w-full z-50 flex items-center justify-between">
+        <header className="fixed top-0 left-0 w-full z-50 flex items-center justify-between h-25">
             <StaggeredMenu
                 position="right"
                 items={menuItems}
