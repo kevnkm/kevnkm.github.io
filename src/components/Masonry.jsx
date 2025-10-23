@@ -80,6 +80,8 @@ const Masonry = ({
 
   const [containerRef, { width }] = useMeasure();
   const [imagesReady, setImagesReady] = useState(false);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
+  const animationTimeline = useRef(null);
 
   const getInitialPosition = (item) => {
     const containerRect = containerRef.current?.getBoundingClientRect();
@@ -112,9 +114,21 @@ const Masonry = ({
   };
 
   useEffect(() => {
-    preloadImages(items.filter((i) => i.img).map((i) => i.img)).then(() =>
-      setImagesReady(true)
-    );
+    const imageUrls = items.filter((i) => i.img).map((i) => i.img);
+
+    if (imageUrls.length === 0) {
+      setImagesReady(true);
+      return;
+    }
+
+    preloadImages(imageUrls)
+      .then(() => {
+        setImagesReady(true);
+      })
+      .catch((err) => {
+        console.error("Error preloading images:", err);
+        setImagesReady(true); // Still show the grid even if preload fails
+      });
   }, [items]);
 
   const grid = useMemo(() => {
@@ -135,13 +149,27 @@ const Masonry = ({
     });
   }, [columns, items, width]);
 
-  const hasMounted = useRef(false);
-
   useLayoutEffect(() => {
-    if (!imagesReady) return;
+    if (!imagesReady || grid.length === 0) return;
+
+    // Kill any existing timeline
+    if (animationTimeline.current) {
+      animationTimeline.current.kill();
+    }
+
+    // Create a new timeline for better control
+    const tl = gsap.timeline({
+      onComplete: () => {
+        setIsInitialLoad(false);
+      },
+    });
 
     grid.forEach((item, index) => {
       const selector = `[data-key="${item.id}"]`;
+      const element = document.querySelector(selector);
+
+      if (!element) return;
+
       const animationProps = {
         x: item.x,
         y: item.y,
@@ -149,26 +177,35 @@ const Masonry = ({
         height: item.h,
       };
 
-      if (!hasMounted.current) {
-        const initialPos = getInitialPosition(item, index);
-        const initialState = {
+      if (isInitialLoad) {
+        const initialPos = getInitialPosition(item);
+
+        // Set initial state immediately (no animation)
+        gsap.set(selector, {
           opacity: 0,
           x: initialPos.x,
           y: initialPos.y,
           width: item.w,
           height: item.h,
+          scale: 1,
           ...(blurToFocus && { filter: "blur(10px)" }),
-        };
-
-        gsap.fromTo(selector, initialState, {
-          opacity: 1,
-          ...animationProps,
-          ...(blurToFocus && { filter: "blur(0px)" }),
-          duration: 0.8,
-          ease: "power3.out",
-          delay: index * stagger,
         });
+
+        // Add animation to timeline
+        tl.to(
+          selector,
+          {
+            opacity: 1,
+            ...animationProps,
+            scale: 1,
+            ...(blurToFocus && { filter: "blur(0px)" }),
+            duration: 0.8,
+            ease: "power3.out",
+          },
+          index * stagger
+        );
       } else {
+        // For subsequent updates (resize, reorder)
         gsap.to(selector, {
           ...animationProps,
           duration: duration,
@@ -178,9 +215,25 @@ const Masonry = ({
       }
     });
 
-    hasMounted.current = true;
-  }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease]);
+    animationTimeline.current = tl;
 
+    return () => {
+      if (animationTimeline.current) {
+        animationTimeline.current.kill();
+      }
+    };
+  }, [
+    grid,
+    imagesReady,
+    isInitialLoad,
+    stagger,
+    animateFrom,
+    blurToFocus,
+    duration,
+    ease,
+  ]);
+
+  // Rest of the component remains the same...
   const handleMouseEnter = (e, item) => {
     const element = e.currentTarget;
     const selector = `[data-key="${item.id}"]`;
