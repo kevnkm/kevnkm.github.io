@@ -1,21 +1,21 @@
-import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { gsap } from 'gsap';
-import './PillNav.css';
+import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { gsap } from "gsap";
+import "./PillNav.css";
 
 const PillNav = ({
   logo,
-  logoAlt = 'Logo',
+  logoAlt = "Logo",
   items,
   activeHref,
-  className = '',
-  ease = 'power3.easeOut',
-  baseColor = '#fff',
-  pillColor = '#060010',
-  hoveredPillTextColor = '#060010',
+  className = "",
+  ease = "power3.easeOut",
+  baseColor = "#fff",
+  pillColor = "#060010",
+  hoveredPillTextColor = "#060010",
   pillTextColor,
   onMobileMenuClick,
-  initialLoadAnimation = true
+  initialLoadAnimation = true,
 }) => {
   const resolvedPillTextColor = pillTextColor ?? baseColor;
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -31,7 +31,7 @@ const PillNav = ({
 
   useEffect(() => {
     const layout = () => {
-      circleRefs.current.forEach(circle => {
+      circleRefs.current.forEach((circle) => {
         if (!circle?.parentElement) return;
 
         const pill = circle.parentElement;
@@ -39,7 +39,8 @@ const PillNav = ({
         const { width: w, height: h } = rect;
         const R = ((w * w) / 4 + h * h) / (2 * h);
         const D = Math.ceil(2 * R) + 2;
-        const delta = Math.ceil(R - Math.sqrt(Math.max(0, R * R - (w * w) / 4))) + 1;
+        const delta =
+          Math.ceil(R - Math.sqrt(Math.max(0, R * R - (w * w) / 4))) + 1;
         const originY = D - delta;
 
         circle.style.width = `${D}px`;
@@ -49,11 +50,11 @@ const PillNav = ({
         gsap.set(circle, {
           xPercent: -50,
           scale: 0,
-          transformOrigin: `50% ${originY}px`
+          transformOrigin: `50% ${originY}px`,
         });
 
-        const label = pill.querySelector('.pill-label');
-        const white = pill.querySelector('.pill-label-hover');
+        const label = pill.querySelector(".pill-label");
+        const white = pill.querySelector(".pill-label-hover");
 
         if (label) gsap.set(label, { y: 0 });
         if (white) gsap.set(white, { y: h + 12, opacity: 0 });
@@ -64,15 +65,27 @@ const PillNav = ({
         tlRefs.current[index]?.kill();
         const tl = gsap.timeline({ paused: true });
 
-        tl.to(circle, { scale: 1.2, xPercent: -50, duration: 2, ease, overwrite: 'auto' }, 0);
+        tl.to(
+          circle,
+          { scale: 1.2, xPercent: -50, duration: 2, ease, overwrite: "auto" },
+          0
+        );
 
         if (label) {
-          tl.to(label, { y: -(h + 8), duration: 2, ease, overwrite: 'auto' }, 0);
+          tl.to(
+            label,
+            { y: -(h + 8), duration: 2, ease, overwrite: "auto" },
+            0
+          );
         }
 
         if (white) {
           gsap.set(white, { y: Math.ceil(h + 100), opacity: 0 });
-          tl.to(white, { y: 0, opacity: 1, duration: 2, ease, overwrite: 'auto' }, 0);
+          tl.to(
+            white,
+            { y: 0, opacity: 1, duration: 2, ease, overwrite: "auto" },
+            0
+          );
         }
 
         tlRefs.current[index] = tl;
@@ -82,7 +95,7 @@ const PillNav = ({
     layout();
 
     const onResize = () => layout();
-    window.addEventListener('resize', onResize);
+    window.addEventListener("resize", onResize);
 
     if (document.fonts?.ready) {
       document.fonts.ready.then(layout).catch(() => {});
@@ -90,7 +103,7 @@ const PillNav = ({
 
     const menu = mobileMenuRef.current;
     if (menu) {
-      gsap.set(menu, { visibility: 'hidden', opacity: 0, scaleY: 1 });
+      gsap.set(menu, { visibility: "hidden", opacity: 0, scaleY: 1 });
     }
 
     if (initialLoadAnimation) {
@@ -102,42 +115,42 @@ const PillNav = ({
         gsap.to(logo, {
           scale: 1,
           duration: 0.6,
-          ease
+          ease,
         });
       }
 
       if (navItems) {
-        gsap.set(navItems, { width: 0, overflow: 'hidden' });
+        gsap.set(navItems, { width: 0, overflow: "hidden" });
         gsap.to(navItems, {
-          width: 'auto',
+          width: "auto",
           duration: 0.6,
-          ease
+          ease,
         });
       }
     }
 
-    return () => window.removeEventListener('resize', onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, [items, ease, initialLoadAnimation]);
 
-  const handleEnter = i => {
+  const handleEnter = (i) => {
     const tl = tlRefs.current[i];
     if (!tl) return;
     activeTweenRefs.current[i]?.kill();
     activeTweenRefs.current[i] = tl.tweenTo(tl.duration(), {
       duration: 0.3,
       ease,
-      overwrite: 'auto'
+      overwrite: "auto",
     });
   };
 
-  const handleLeave = i => {
+  const handleLeave = (i) => {
     const tl = tlRefs.current[i];
     if (!tl) return;
     activeTweenRefs.current[i]?.kill();
     activeTweenRefs.current[i] = tl.tweenTo(0, {
       duration: 0.2,
       ease,
-      overwrite: 'auto'
+      overwrite: "auto",
     });
   };
 
@@ -150,7 +163,7 @@ const PillNav = ({
       rotate: 360,
       duration: 0.2,
       ease,
-      overwrite: 'auto'
+      overwrite: "auto",
     });
   };
 
@@ -162,7 +175,7 @@ const PillNav = ({
     const menu = mobileMenuRef.current;
 
     if (hamburger) {
-      const lines = hamburger.querySelectorAll('.hamburger-line');
+      const lines = hamburger.querySelectorAll(".hamburger-line");
       if (newState) {
         gsap.to(lines[0], { rotation: 45, y: 3, duration: 0.3, ease });
         gsap.to(lines[1], { rotation: -45, y: -3, duration: 0.3, ease });
@@ -174,7 +187,7 @@ const PillNav = ({
 
     if (menu) {
       if (newState) {
-        gsap.set(menu, { visibility: 'visible' });
+        gsap.set(menu, { visibility: "visible" });
         gsap.fromTo(
           menu,
           { opacity: 0, y: 10, scaleY: 1 },
@@ -184,7 +197,7 @@ const PillNav = ({
             scaleY: 1,
             duration: 0.3,
             ease,
-            transformOrigin: 'top center'
+            transformOrigin: "top center",
           }
         );
       } else {
@@ -194,10 +207,10 @@ const PillNav = ({
           scaleY: 1,
           duration: 0.2,
           ease,
-          transformOrigin: 'top center',
+          transformOrigin: "top center",
           onComplete: () => {
-            gsap.set(menu, { visibility: 'hidden' });
-          }
+            gsap.set(menu, { visibility: "hidden" });
+          },
         });
       }
     }
@@ -205,26 +218,57 @@ const PillNav = ({
     onMobileMenuClick?.();
   };
 
-  const isExternalLink = href =>
-    href.startsWith('http://') ||
-    href.startsWith('https://') ||
-    href.startsWith('//') ||
-    href.startsWith('mailto:') ||
-    href.startsWith('tel:') ||
-    href.startsWith('#');
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
 
-  const isRouterLink = href => href && !isExternalLink(href);
+    const hamburger = hamburgerRef.current;
+    const menu = mobileMenuRef.current;
+
+    if (hamburger) {
+      const lines = hamburger.querySelectorAll(".hamburger-line");
+      gsap.to(lines[0], { rotation: 0, y: 0, duration: 0.3, ease });
+      gsap.to(lines[1], { rotation: 0, y: 0, duration: 0.3, ease });
+    }
+
+    if (menu) {
+      gsap.to(menu, {
+        opacity: 0,
+        y: 10,
+        scaleY: 1,
+        duration: 0.2,
+        ease,
+        transformOrigin: "top center",
+        onComplete: () => {
+          gsap.set(menu, { visibility: "hidden" });
+        },
+      });
+    }
+  };
+
+  const isExternalLink = (href) =>
+    href.startsWith("http://") ||
+    href.startsWith("https://") ||
+    href.startsWith("//") ||
+    href.startsWith("mailto:") ||
+    href.startsWith("tel:") ||
+    href.startsWith("#");
+
+  const isRouterLink = (href) => href && !isExternalLink(href);
 
   const cssVars = {
-    ['--base']: baseColor,
-    ['--pill-bg']: pillColor,
-    ['--hover-text']: hoveredPillTextColor,
-    ['--pill-text']: resolvedPillTextColor
+    ["--base"]: baseColor,
+    ["--pill-bg"]: pillColor,
+    ["--hover-text"]: hoveredPillTextColor,
+    ["--pill-text"]: resolvedPillTextColor,
   };
 
   return (
     <div className="pill-nav-container">
-      <nav className={`pill-nav ${className}`} aria-label="Primary" style={cssVars}>
+      <nav
+        className={`pill-nav ${className}`}
+        aria-label="Primary"
+        style={cssVars}
+      >
         {isRouterLink(items?.[0]?.href) ? (
           <Link
             className="pill-logo"
@@ -232,7 +276,7 @@ const PillNav = ({
             aria-label="Home"
             onMouseEnter={handleLogoEnter}
             role="menuitem"
-            ref={el => {
+            ref={(el) => {
               logoRef.current = el;
             }}
           >
@@ -241,10 +285,10 @@ const PillNav = ({
         ) : (
           <a
             className="pill-logo"
-            href={items?.[0]?.href || '#'}
+            href={items?.[0]?.href || "#"}
             aria-label="Home"
             onMouseEnter={handleLogoEnter}
-            ref={el => {
+            ref={(el) => {
               logoRef.current = el;
             }}
           >
@@ -260,7 +304,9 @@ const PillNav = ({
                   <Link
                     role="menuitem"
                     to={item.href}
-                    className={`pill${activeHref === item.href ? ' is-active' : ''}`}
+                    className={`pill${
+                      activeHref === item.href ? " is-active" : ""
+                    }`}
                     aria-label={item.ariaLabel || item.label}
                     onMouseEnter={() => handleEnter(i)}
                     onMouseLeave={() => handleLeave(i)}
@@ -268,7 +314,7 @@ const PillNav = ({
                     <span
                       className="hover-circle"
                       aria-hidden="true"
-                      ref={el => {
+                      ref={(el) => {
                         circleRefs.current[i] = el;
                       }}
                     />
@@ -283,7 +329,9 @@ const PillNav = ({
                   <a
                     role="menuitem"
                     href={item.href}
-                    className={`pill${activeHref === item.href ? ' is-active' : ''}`}
+                    className={`pill${
+                      activeHref === item.href ? " is-active" : ""
+                    }`}
                     aria-label={item.ariaLabel || item.label}
                     onMouseEnter={() => handleEnter(i)}
                     onMouseLeave={() => handleLeave(i)}
@@ -291,7 +339,7 @@ const PillNav = ({
                     <span
                       className="hover-circle"
                       aria-hidden="true"
-                      ref={el => {
+                      ref={(el) => {
                         circleRefs.current[i] = el;
                       }}
                     />
@@ -319,23 +367,31 @@ const PillNav = ({
         </button>
       </nav>
 
-      <div className="mobile-menu-popover mobile-only" ref={mobileMenuRef} style={cssVars}>
+      <div
+        className="mobile-menu-popover mobile-only"
+        ref={mobileMenuRef}
+        style={cssVars}
+      >
         <ul className="mobile-menu-list">
           {items.map((item, i) => (
             <li key={item.href || `mobile-item-${i}`}>
               {isRouterLink(item.href) ? (
                 <Link
                   to={item.href}
-                  className={`mobile-menu-link${activeHref === item.href ? ' is-active' : ''}`}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`mobile-menu-link${
+                    activeHref === item.href ? " is-active" : ""
+                  }`}
+                  onClick={closeMobileMenu}
                 >
                   {item.label}
                 </Link>
               ) : (
                 <a
                   href={item.href}
-                  className={`mobile-menu-link${activeHref === item.href ? ' is-active' : ''}`}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`mobile-menu-link${
+                    activeHref === item.href ? " is-active" : ""
+                  }`}
+                  onClick={closeMobileMenu}
                 >
                   {item.label}
                 </a>
