@@ -1,17 +1,22 @@
 import React from "react";
 import Masonry from "@/components/Masonry";
 import Header from "@/components/Header";
+import huetopiaImage from "@/images/huetopia/huetopia_0.png";
+import specialRelativityImage from "@/images/specialrelativity/specialrelativity_1.png";
+import labbitImage from "@/images/labbit/labbit_1.png";
+import apparelDesignImage from "@/images/appareldesign/appareldesign_1.gif";
+import ocdSimulationImage from "@/images/ocdsimulation/ocd_1.gif";
 
 const projectItems = [
     {
         id: "0",
-        img: "/src/images/huetopia/huetopia_0.png",
+        img: huetopiaImage,
         url: "https://www.meta.com/experiences/26230755453235481/",
         height: 500,
     },
     {
         id: "8",
-        img: "/src/images/specialrelativity/specialrelativity_1.png",
+        img: specialRelativityImage,
         url: "https://github.com/kevnkm/special-relativity",
         height: 500,
     },
@@ -22,7 +27,7 @@ const projectItems = [
     },
     {
         id: "2",
-        img: "/src/images/labbit/labbit_1.png",
+        img: labbitImage,
         url: "https://www.cubeloom.com/",
         height: 500,
     },
@@ -43,13 +48,13 @@ const projectItems = [
     },
     {
         id: "6",
-        img: "/src/images/appareldesign/appareldesign_1.gif",
+        img: apparelDesignImage,
         url: "https://github.com/kevnkm/apparel-design",
         height: 500,
     },
     {
         id: "7",
-        img: "/src/images/ocdsimulation/ocd_1.gif",
+        img: ocdSimulationImage,
         url: "https://github.com/kevnkm/ocd-simulation",
         height: 500,
     },
