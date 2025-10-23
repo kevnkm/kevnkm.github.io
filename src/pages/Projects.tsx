@@ -61,7 +61,7 @@ const projectItems = [
 
 const Projects: React.FC = () => {
     return (
-        <div className="min-h-screen bg-white flex flex-col p-4">
+        <div className="min-h-screen bg-background flex flex-col p-4">
             <main className="flex flex-1 justify-center items-start pt-25" id="projects">
                 <Masonry
                     items={projectItems}

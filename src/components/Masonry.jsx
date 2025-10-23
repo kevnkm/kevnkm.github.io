@@ -1,8 +1,6 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { gsap } from "gsap";
 
-import "./Masonry.css";
-
 const useMedia = (queries, values, defaultValue) => {
   const get = () =>
     values[queries.findIndex((q) => matchMedia(q).matches)] ?? defaultValue;
@@ -127,7 +125,7 @@ const Masonry = ({
       })
       .catch((err) => {
         console.error("Error preloading images:", err);
-        setImagesReady(true); // Still show the grid even if preload fails
+        setImagesReady(true);
       });
   }, [items]);
 
@@ -152,12 +150,10 @@ const Masonry = ({
   useLayoutEffect(() => {
     if (!imagesReady || grid.length === 0) return;
 
-    // Kill any existing timeline
     if (animationTimeline.current) {
       animationTimeline.current.kill();
     }
 
-    // Create a new timeline for better control
     const tl = gsap.timeline({
       onComplete: () => {
         setIsInitialLoad(false);
@@ -180,7 +176,6 @@ const Masonry = ({
       if (isInitialLoad) {
         const initialPos = getInitialPosition(item);
 
-        // Set initial state immediately (no animation)
         gsap.set(selector, {
           opacity: 0,
           x: initialPos.x,
@@ -191,7 +186,6 @@ const Masonry = ({
           ...(blurToFocus && { filter: "blur(10px)" }),
         });
 
-        // Add animation to timeline
         tl.to(
           selector,
           {
@@ -205,7 +199,6 @@ const Masonry = ({
           index * stagger
         );
       } else {
-        // For subsequent updates (resize, reorder)
         gsap.to(selector, {
           ...animationProps,
           duration: duration,
@@ -233,7 +226,6 @@ const Masonry = ({
     ease,
   ]);
 
-  // Rest of the component remains the same...
   const handleMouseEnter = (e, item) => {
     const element = e.currentTarget;
     const selector = `[data-key="${item.id}"]`;
@@ -281,67 +273,32 @@ const Masonry = ({
   };
 
   return (
-    <div ref={containerRef} className="list">
-      {grid.map((item) => {
-        if (!item.img) {
-          return (
+    <div ref={containerRef} className="relative w-full h-full">
+      {grid.map((item) => (
+        <div
+          key={item.id}
+          data-key={item.id}
+          className="absolute p-1.5 cursor-pointer top-0 left-0 will-change-transform will-change-opacity"
+          onClick={() => window.open(item.url, "_blank", "noopener")}
+          onMouseEnter={(e) => handleMouseEnter(e, item)}
+          onMouseLeave={(e) => handleMouseLeave(e, item)}
+        >
+          {item.img ? (
             <div
-              key={item.id}
-              data-key={item.id}
-              className="item-wrapper"
-              onClick={() => window.open(item.url, "_blank", "noopener")}
-              onMouseEnter={(e) => handleMouseEnter(e, item)}
-              onMouseLeave={(e) => handleMouseLeave(e, item)}
-            >
-              <div
-                className="item-img"
-                style={{
-                  backgroundColor: "#f0f0f0",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  borderRadius: "8px",
-                }}
-              >
-                <span>No Image Available</span>
-              </div>
-            </div>
-          );
-        }
-        return (
-          <div
-            key={item.id}
-            data-key={item.id}
-            className="item-wrapper"
-            onClick={() => window.open(item.url, "_blank", "noopener")}
-            onMouseEnter={(e) => handleMouseEnter(e, item)}
-            onMouseLeave={(e) => handleMouseLeave(e, item)}
-          >
-            <div
-              className="item-img"
+              className="relative w-full h-full bg-cover bg-center rounded-lg shadow-xl border border-border"
               style={{ backgroundImage: `url(${item.img})` }}
             >
               {colorShiftOnHover && (
-                <div
-                  className="color-overlay"
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                    background:
-                      "linear-gradient(45deg, rgba(255,0,150,0.5), rgba(0,150,255,0.5))",
-                    opacity: 0,
-                    pointerEvents: "none",
-                    borderRadius: "8px",
-                  }}
-                />
+                <div className="color-overlay absolute inset-0 bg-primary/20 opacity-0 pointer-events-none rounded-lg" />
               )}
             </div>
-          </div>
-        );
-      })}
+          ) : (
+            <div className="relative w-full h-full bg-background text-foreground flex items-center justify-center rounded-lg shadow-xl border border-border uppercase text-[10px] leading-[10px]">
+              <span>No Image Available</span>
+            </div>
+          )}
+        </div>
+      ))}
     </div>
   );
 };

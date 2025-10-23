@@ -1,80 +1,26 @@
-import React from "react";
-import Masonry from "@/components/Masonry";
-import huetopiaImage from "@/images/huetopia/huetopia_0.png";
-import specialRelativityImage from "@/images/specialrelativity/specialrelativity_1.png";
-import labbitImage from "@/images/labbit/labbit_1.png";
-import apparelDesignImage from "@/images/appareldesign/appareldesign_1.gif";
-import ocdSimulationImage from "@/images/ocdsimulation/ocd_1.gif";
+import graduationImage from "@/images/me/graduation.jpg";
 
-const projectItems = [
-    {
-        id: "0",
-        img: huetopiaImage,
-        url: "https://www.meta.com/experiences/26230755453235481/",
-        height: 500,
-    },
-    {
-        id: "8",
-        img: specialRelativityImage,
-        url: "https://github.com/kevnkm/special-relativity",
-        height: 500,
-    },
-    {
-        id: "1",
-        url: "https://www.cubeloom.com/",
-        height: 400,
-    },
-    {
-        id: "2",
-        img: labbitImage,
-        url: "https://www.cubeloom.com/",
-        height: 500,
-    },
-    {
-        id: "3",
-        url: "https://github.com/games4cause/wildfire/",
-        height: 400,
-    },
-    {
-        id: "4",
-        url: "https://kevnkm.github.io/graphics/",
-        height: 400,
-    },
-    {
-        id: "5",
-        url: "https://kevnkm.github.io/rosters/",
-        height: 400,
-    },
-    {
-        id: "6",
-        img: apparelDesignImage,
-        url: "https://github.com/kevnkm/apparel-design",
-        height: 500,
-    },
-    {
-        id: "7",
-        img: ocdSimulationImage,
-        url: "https://github.com/kevnkm/ocd-simulation",
-        height: 500,
-    },
-];
-
-const Home: React.FC = () => {
+const Home = () => {
     return (
-        <div className="min-h-screen bg-white flex flex-col p-4">
-            <main className="flex flex-1 justify-center items-start pt-25" id="projects">
-                <Masonry
-                    items={projectItems}
-                    ease="power3.out"
-                    duration={0.6}
-                    stagger={0.05}
-                    animateFrom="bottom"
-                    scaleOnHover={true}
-                    hoverScale={0.95}
-                    blurToFocus={true}
-                    colorShiftOnHover={false}
-                />
-            </main>
+        <div className="min-h-screen flex flex-col items-center justify-center bg-background text-foreground transition-colors duration-300 p-6 text-center">
+
+            {/* // Circular profile picture. Make it bigger */}
+            <img
+                src={graduationImage}
+                alt="Kevin Kim"
+                className="w-64 h-64 rounded-full mb-6 object-cover"
+            />
+            <h1 className="text-3xl md:text-4xl font-bold mb-6">
+                Hi, I'm Kevin 👋
+            </h1>
+
+            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mb-10 leading-relaxed">
+                I'm an interactive designer and developer passionate about blending{" "}
+                <span className="text-foreground font-medium">creativity</span>,{" "}
+                <span className="text-foreground font-medium">technology</span>, and{" "}
+                <span className="text-foreground font-medium">education</span>.
+                Recently, I've been building XR games, AI-powered productivity tools, and immersive learning experiences for research purposes.
+            </p>
         </div>
     );
 };
