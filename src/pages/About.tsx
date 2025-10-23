@@ -124,12 +124,24 @@ export function About() {
                 </div>
             ),
         },
+        {
+            title: "2020",
+            content: (
+                <div>
+                    <p className="mb-4 text-xs font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
+                        Read <a href="https://en.wikipedia.org/wiki/Homo_Ludens" target="_blank" rel="noopener noreferrer">Homo Ludens</a>
+                    </p>
+                    <div className="grid grid-cols-2 gap-4">
+                    </div>
+                </div >
+            ),
+        },
     ];
 
     return (
         <div className="min-h-screen bg-white flex flex-col">
             <Header />
-            <main className="flex flex-1 flex-col px-4 py-30">
+            <main className="flex flex-1 flex-col px-4 pt-30 pb-[50vh]">
                 <div className="container mx-auto">
                     <div className="relative w-full overflow-clip">
                         <Timeline data={data} />
