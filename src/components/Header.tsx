@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import logo from "../images/kevnkm_icon.png";
 
 const menuItems = [
-    { label: "Home", ariaLabel: "View my projects", link: "/" },
+    { label: "Home", ariaLabel: "Welcome", link: "/" },
+    { label: "Projects", ariaLabel: "View my projects", link: "/projects" },
     { label: "About", ariaLabel: "Learn about me", link: "/about" },
     { label: "Contact", ariaLabel: "Get in touch", link: "/contact" },
 ];
