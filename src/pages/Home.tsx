@@ -1,104 +1,55 @@
 import React from "react";
-import Masonry from "../components/Masonry";
-import Header from "../components/Header";
+import Masonry from "@/components/Masonry";
+import Header from "@/components/Header";
 
 const projectItems = [
     {
         id: "0",
-        img: Object.values(
-            import.meta.glob("/src/images/huetopia/*.{jpg,png}", {
-                eager: true,
-                import: "default",
-            })
-        )[0],
+        img: "/src/images/huetopia/huetopia_0.png",
         url: "https://www.meta.com/experiences/26230755453235481/",
         height: 500,
     },
     {
         id: "8",
-        img: Object.values(
-            import.meta.glob("/src/images/specialrelativity/*.{jpg,png}", {
-                eager: true,
-                import: "default",
-            })
-        )[0],
+        img: "/src/images/specialrelativity/specialrelativity_1.png",
         url: "https://github.com/kevnkm/special-relativity",
         height: 500,
     },
     {
         id: "1",
-        img: Object.values(
-            import.meta.glob("/src/images/arcadex/*.{jpg,png}", {
-                eager: true,
-                import: "default",
-            })
-        )[0],
         url: "https://www.cubeloom.com/",
         height: 400,
     },
     {
         id: "2",
-        img: Object.values(
-            import.meta.glob("/src/images/labbit/*.{jpg,png}", {
-                eager: true,
-                import: "default",
-            })
-        )[0],
+        img: "/src/images/labbit/labbit_1.png",
         url: "https://www.cubeloom.com/",
         height: 500,
     },
     {
         id: "3",
-        img: Object.values(
-            import.meta.glob("/src/images/wildfire/*.jpg", {
-                eager: true,
-                import: "default",
-            })
-        )[0],
         url: "https://github.com/games4cause/wildfire/",
         height: 400,
     },
     {
         id: "4",
-        img: Object.values(
-            import.meta.glob("/src/images/graphicshub/*.jpg", {
-                eager: true,
-                import: "default",
-            })
-        )[0],
         url: "https://kevnkm.github.io/graphics/",
         height: 400,
     },
     {
         id: "5",
-        img: Object.values(
-            import.meta.glob("/src/images/rostertracker/*.jpg", {
-                eager: true,
-                import: "default",
-            })
-        )[0],
         url: "https://kevnkm.github.io/rosters/",
         height: 400,
     },
     {
         id: "6",
-        img: Object.values(
-            import.meta.glob("/src/images/appareldesign/*.{gif,jpg,jpeg,png}", {
-                eager: true,
-                import: "default",
-            })
-        )[0],
+        img: "/src/images/appareldesign/appareldesign_1.gif",
         url: "https://github.com/kevnkm/apparel-design",
         height: 500,
     },
     {
         id: "7",
-        img: Object.values(
-            import.meta.glob("/src/images/ocdsimulation/*.{gif,jpg,jpeg,png}", {
-                eager: true,
-                import: "default",
-            })
-        )[0],
+        img: "/src/images/ocdsimulation/ocd_1.gif",
         url: "https://github.com/kevnkm/ocd-simulation",
         height: 500,
     },
