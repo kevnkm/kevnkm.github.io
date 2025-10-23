@@ -1,12 +1,12 @@
 import { useEffect } from "react";
-import { Timeline } from "../components/ui/timeline";
-import Header from "../components/Header";
-import labbitImage from "../images/labbit/labbit_1.png";
-import specialRelativityImage from "../images/specialrelativity/specialrelativity_1.png";
-import huetopiaImage from "../images/huetopia/huetopia_0.png";
-import graduationImage from "../images/me/graduation.jpg";
-import ocdSimulationImage from "../images/ocdsimulation/ocd_1.gif";
-import apparelDesignImage from "../images/appareldesign/appareldesign_1.gif";
+import { Timeline } from "@/components/ui/timeline";
+import Header from "@/components/Header";
+import labbitImage from "@/images/labbit/labbit_1.png";
+import specialRelativityImage from "@/images/specialrelativity/specialrelativity_1.png";
+import huetopiaImage from "@/images/huetopia/huetopia_0.png";
+import graduationImage from "@/images/me/graduation.jpg";
+import ocdSimulationImage from "@/images/ocdsimulation/ocd_1.gif";
+import apparelDesignImage from "@/images/appareldesign/appareldesign_1.gif";
 
 const preloadImages = async (urls: string[]) => {
     await Promise.all(
