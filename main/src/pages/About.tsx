@@ -1,7 +1,50 @@
+import { useEffect } from "react";
 import { Timeline } from "../components/ui/timeline";
 import Header from "../components/Header";
+import labbitImage from "../images/labbit/labbit_1.png";
+import specialRelativityImage from "../images/specialrelativity/specialrelativity_1.png";
+import huetopiaImage from "../images/huetopia/huetopia_0.png";
+import graduationImage from "../images/me/graduation.jpg";
+import ocdSimulationImage from "../images/ocdsimulation/ocd_1.gif";
+import apparelDesignImage from "../images/appareldesign/appareldesign_1.gif";
+
+const preloadImages = async (urls: string[]) => {
+    await Promise.all(
+        urls.map((src) =>
+            new Promise<void>((resolve) => {
+                const img = new Image();
+                img.src = src;
+                img.onload = img.onerror = () => resolve();
+            })
+        )
+    );
+};
+
+const ImageComponent = ({ src, alt }: { src?: string; alt: string }) => (
+    <img
+        src={src}
+        alt={alt}
+        width={500}
+        height={500}
+        className="h-20 w-full rounded-lg object-cover 
+        md:h-44 lg:h-60"
+    />
+);
 
 export function About() {
+    const imageUrls = [
+        labbitImage,
+        specialRelativityImage,
+        huetopiaImage,
+        graduationImage,
+        ocdSimulationImage,
+        apparelDesignImage,
+    ];
+
+    useEffect(() => {
+        preloadImages(imageUrls);
+    }, []);
+
     const data = [
         {
             title: "Now",
@@ -11,13 +54,6 @@ export function About() {
                         Focusing on building an AI-powered productivity platform that gamifies note-taking and problem-solving.
                     </p>
                     <div className="grid grid-cols-2 gap-4">
-                        <img
-                            src="/src/images/.png"
-                            alt=""
-                            width={500}
-                            height={500}
-                            className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-                        />
                     </div>
                 </div>
             ),
@@ -27,30 +63,11 @@ export function About() {
             content: (
                 <div>
                     <p className="mb-8 text-xs font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
-                        Developed and Labbit, Arcadex, and special relativity education module.
+                        Developed Labbit, Arcadex, and special relativity education module.
                     </p>
                     <div className="grid grid-cols-2 gap-4">
-                        <img
-                            src="/src/images/labbit/labbit_1.png"
-                            alt="Labbit"
-                            width={500}
-                            height={500}
-                            className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-                        />
-                        <img
-                            src="/src/images/arcadex/arcadex_1.png"
-                            alt="Arcadex"
-                            width={500}
-                            height={500}
-                            className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-                        />
-                        <img
-                            src="/src/images/specialrelativity/specialrelativity_1.png"
-                            alt="Special Relativity"
-                            width={500}
-                            height={500}
-                            className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-                        />
+                        <ImageComponent src={labbitImage} alt="Labbit" />
+                        <ImageComponent src={specialRelativityImage} alt="Special Relativity" />
                     </div>
                 </div>
             ),
@@ -63,13 +80,7 @@ export function About() {
                         Developed and launched Huetopia.
                     </p>
                     <div className="grid grid-cols-2 gap-4">
-                        <img
-                            src="/src/images/huetopia/huetopia_0.png"
-                            alt="Huetopia"
-                            width={500}
-                            height={500}
-                            className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-                        />
+                        <ImageComponent src={huetopiaImage} alt="Huetopia" />
                     </div>
                 </div>
             ),
@@ -82,13 +93,7 @@ export function About() {
                         Graduated from Cornell!
                     </p>
                     <div className="grid grid-cols-2 gap-4">
-                        <img
-                            src="/src/images/me/graduation.jpg"
-                            alt="Cornell"
-                            width={500}
-                            height={500}
-                            className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-                        />
+                        <ImageComponent src={graduationImage} alt="Cornell" />
                     </div>
                 </div>
             ),
@@ -101,13 +106,6 @@ export function About() {
                         Explored foundational concepts of computer graphics by working on a couple of graphics programming projects.
                     </p>
                     <div className="grid grid-cols-2 gap-4">
-                        <img
-                            src="/src/images/graphicshub/graphicshub.jpg"
-                            alt="GraphicsHub"
-                            width={500}
-                            height={500}
-                            className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-                        />
                     </div>
                 </div>
             ),
@@ -120,20 +118,8 @@ export function About() {
                         Engaged in VR development by building an OCD simulation module and an apparel design education module.
                     </p>
                     <div className="grid grid-cols-2 gap-4">
-                        <img
-                            src="/src/images/ocdsimulation/ocd_1.gif"
-                            alt="OCD Simulation"
-                            width={500}
-                            height={500}
-                            className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-                        />
-                        <img
-                            src="/src/images/appareldesign/appareldesign_1.gif"
-                            alt="Apparel Design"
-                            width={500}
-                            height={500}
-                            className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-                        />
+                        <ImageComponent src={ocdSimulationImage} alt="OCD Simulation" />
+                        <ImageComponent src={apparelDesignImage} alt="Apparel Design" />
                     </div>
                 </div>
             ),
