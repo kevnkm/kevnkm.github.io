@@ -48,7 +48,7 @@ export function About() {
             title: "Now",
             content: (
                 <div>
-                    <p className="text-base font-normal text-gray-600 mb-6">
+                    <p className="text-base font-normal text-muted-foreground mb-6">
                         Focusing on building an AI-powered productivity platform that gamifies note-taking and problem-solving.
                     </p>
                     <div className="flex flex-wrap justify-start gap-4">
@@ -60,7 +60,7 @@ export function About() {
             title: "2025",
             content: (
                 <div>
-                    <p className="text-base font-normal text-gray-600 mb-6">
+                    <p className="text-base font-normal text-muted-foreground mb-6">
                         Developed Labbit, Arcadex, and special relativity education module.
                     </p>
                     <div className="flex flex-wrap justify-start gap-4">
@@ -74,7 +74,7 @@ export function About() {
             title: "2024",
             content: (
                 <div>
-                    <p className="text-base font-normal text-gray-600 mb-6">
+                    <p className="text-base font-normal text-muted-foreground mb-6">
                         Developed and launched Huetopia.
                     </p>
                     <div className="flex flex-wrap justify-start gap-4">
@@ -87,7 +87,7 @@ export function About() {
             title: "2023.12",
             content: (
                 <div>
-                    <p className="text-base font-normal text-gray-600 mb-6">
+                    <p className="text-base font-normal text-muted-foreground mb-6">
                         Graduated from Cornell!
                     </p>
                     <div className="flex flex-wrap justify-start gap-4">
@@ -100,8 +100,8 @@ export function About() {
             title: "2023",
             content: (
                 <div>
-                    <p className="text-base font-normal text-gray-600 mb-6">
-                        Explored foundational concepts of computer graphics by working on a couple of graphics programming projects.
+                    <p className="text-base font-normal text-muted-foreground mb-6">
+                        Explored foundational concepts of computer graphics through a couple of graphics programming projects.
                     </p>
                     <div className="flex flex-wrap justify-start gap-4">
                     </div>
@@ -112,7 +112,7 @@ export function About() {
             title: "2022",
             content: (
                 <div>
-                    <p className="text-base font-normal text-gray-600 mb-6">
+                    <p className="text-base font-normal text-muted-foreground mb-6">
                         Engaged in VR development by building an OCD simulation module and an apparel design education module.
                     </p>
                     <div className="flex flex-wrap justify-start gap-4">
@@ -121,19 +121,7 @@ export function About() {
                     </div>
                 </div>
             ),
-        },
-        {
-            title: "2020",
-            content: (
-                <div>
-                    <p className="text-base font-normal text-gray-600 mb-6">
-                        Read <a href="https://en.wikipedia.org/wiki/Homo_Ludens" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700">Homo Ludens</a>
-                    </p>
-                    <div className="flex flex-wrap justify-start gap-4">
-                    </div>
-                </div>
-            ),
-        },
+        }
     ];
 
     return (
