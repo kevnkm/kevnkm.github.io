@@ -1,7 +1,7 @@
 import React from "react";
 import Masonry from "@/components/Masonry";
 import huetopiaImage from "@/images/huetopia/huetopia_0.png";
-import specialRelativityImage from "@/images/specialrelativity/specialrelativity_1.png";
+import specialRelativityImage from "@/images/specialrelativity/specialrelativity_3.gif";
 import labbitImage from "@/images/labbit/labbit_1.png";
 import apparelDesignImage from "@/images/appareldesign/appareldesign_1.gif";
 import ocdSimulationImage from "@/images/ocdsimulation/ocd_1.gif";
@@ -11,7 +11,7 @@ const projectItems = [
         id: "0",
         img: huetopiaImage,
         url: "https://www.meta.com/experiences/26230755453235481/",
-        height: 500,
+        height: 800,
     },
     {
         id: "8",
@@ -55,12 +55,13 @@ const projectItems = [
         id: "7",
         img: ocdSimulationImage,
         url: "https://github.com/kevnkm/ocd-simulation",
-        height: 500,
+        height: 600,
     },
 ];
 
 const Projects: React.FC = () => {
     return (
+
         <div className="min-h-screen bg-background flex flex-col p-4">
             <main className="flex flex-1 justify-center items-start pt-25" id="projects">
                 <Masonry
