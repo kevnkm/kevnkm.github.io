@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { Timeline } from "@/components/ui/timeline";
-import Header from "@/components/Header";
 import labbitImage from "@/images/labbit/labbit_1.png";
 import specialRelativityImage from "@/images/specialrelativity/specialrelativity_1.png";
 import huetopiaImage from "@/images/huetopia/huetopia_0.png";
@@ -24,10 +23,9 @@ const ImageComponent = ({ src, alt }: { src?: string; alt: string }) => (
     <img
         src={src}
         alt={alt}
-        width={500}
-        height={500}
-        className="h-20 w-full rounded-lg object-cover 
-        md:h-44 lg:h-60"
+        width={200}
+        height={200}
+        className="h-24 w-48 rounded-lg object-cover sm:h-32 sm:w-64 md:h-40 md:w-80 transition-transform hover:scale-105"
     />
 );
 
@@ -50,10 +48,10 @@ export function About() {
             title: "Now",
             content: (
                 <div>
-                    <p className="mb-8 text-xs font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
+                    <p className="text-base font-normal text-gray-600 mb-6">
                         Focusing on building an AI-powered productivity platform that gamifies note-taking and problem-solving.
                     </p>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="flex flex-wrap justify-start gap-4">
                     </div>
                 </div>
             ),
@@ -62,10 +60,10 @@ export function About() {
             title: "2025",
             content: (
                 <div>
-                    <p className="mb-8 text-xs font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
+                    <p className="text-base font-normal text-gray-600 mb-6">
                         Developed Labbit, Arcadex, and special relativity education module.
                     </p>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="flex flex-wrap justify-start gap-4">
                         <ImageComponent src={labbitImage} alt="Labbit" />
                         <ImageComponent src={specialRelativityImage} alt="Special Relativity" />
                     </div>
@@ -76,10 +74,10 @@ export function About() {
             title: "2024",
             content: (
                 <div>
-                    <p className="mb-8 text-xs font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
+                    <p className="text-base font-normal text-gray-600 mb-6">
                         Developed and launched Huetopia.
                     </p>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="flex flex-wrap justify-start gap-4">
                         <ImageComponent src={huetopiaImage} alt="Huetopia" />
                     </div>
                 </div>
@@ -89,10 +87,10 @@ export function About() {
             title: "2023.12",
             content: (
                 <div>
-                    <p className="mb-8 text-xs font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
+                    <p className="text-base font-normal text-gray-600 mb-6">
                         Graduated from Cornell!
                     </p>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="flex flex-wrap justify-start gap-4">
                         <ImageComponent src={graduationImage} alt="Cornell" />
                     </div>
                 </div>
@@ -102,10 +100,10 @@ export function About() {
             title: "2023",
             content: (
                 <div>
-                    <p className="mb-8 text-xs font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
+                    <p className="text-base font-normal text-gray-600 mb-6">
                         Explored foundational concepts of computer graphics by working on a couple of graphics programming projects.
                     </p>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="flex flex-wrap justify-start gap-4">
                     </div>
                 </div>
             ),
@@ -114,10 +112,10 @@ export function About() {
             title: "2022",
             content: (
                 <div>
-                    <p className="mb-4 text-xs font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
+                    <p className="text-base font-normal text-gray-600 mb-6">
                         Engaged in VR development by building an OCD simulation module and an apparel design education module.
                     </p>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="flex flex-wrap justify-start gap-4">
                         <ImageComponent src={ocdSimulationImage} alt="OCD Simulation" />
                         <ImageComponent src={apparelDesignImage} alt="Apparel Design" />
                     </div>
@@ -128,26 +126,21 @@ export function About() {
             title: "2020",
             content: (
                 <div>
-                    <p className="mb-4 text-xs font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
-                        Read <a href="https://en.wikipedia.org/wiki/Homo_Ludens" target="_blank" rel="noopener noreferrer">Homo Ludens</a>
+                    <p className="text-base font-normal text-gray-600 mb-6">
+                        Read <a href="https://en.wikipedia.org/wiki/Homo_Ludens" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700">Homo Ludens</a>
                     </p>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="flex flex-wrap justify-start gap-4">
                     </div>
-                </div >
+                </div>
             ),
         },
     ];
 
     return (
-        <div className="min-h-screen bg-white flex flex-col">
-            <Header />
-            <main className="flex flex-1 flex-col px-4 pt-30 pb-[50vh]">
-                <div className="container mx-auto">
-                    <div className="relative w-full overflow-clip">
-                        <Timeline data={data} />
-                    </div>
-                </div>
-            </main>
+        <div className="min-h-screen flex flex-col items-center justify-center p-4">
+            <div className="w-full max-w-4xl">
+                <Timeline data={data} />
+            </div>
         </div>
     );
 }
