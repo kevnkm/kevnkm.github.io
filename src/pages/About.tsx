@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Timeline } from "@/components/ui/timeline";
 import labbitImage from "@/images/labbit/labbit_1.png";
-import specialRelativityImage from "@/images/specialrelativity/specialrelativity_1.gif";
+import specialRelativityImage from "@/images/specialrelativity/specialrelativity_13.gif";
 import huetopiaImage from "@/images/huetopia/huetopia_0.png";
 import graduationImage from "@/images/me/graduation.jpg";
 import ocdSimulationImage from "@/images/ocdsimulation/ocd_1.gif";
