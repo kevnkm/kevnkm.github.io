@@ -1,9 +1,11 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ExternalLink } from "lucide-react";
+import { FaMeta, FaGithub } from "react-icons/fa6";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -11,6 +13,7 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
+  DrawerDescription,
   DrawerHeader,
   DrawerTitle,
   DrawerFooter,
@@ -302,16 +305,15 @@ const Masonry = ({
     return (
       <div className="space-y-4">
         {selectedItem.img && (
-          <img
-            src={selectedItem.img}
-            alt={selectedItem.id}
-            className="w-full rounded-lg"
-          />
+          <div className="w-full aspect-video rounded-lg overflow-hidden">
+            <img
+              src={selectedItem.img}
+              alt={selectedItem.id}
+              className="w-full h-full object-cover"
+            />
+          </div>
         )}
         <div className="space-y-2">
-          <p className="text-sm text-muted-foreground">
-            Item ID: {selectedItem.id}
-          </p>
           {selectedItem.url && (
             <Button
               onClick={() =>
@@ -319,7 +321,14 @@ const Masonry = ({
               }
               className="w-full"
             >
-              <ExternalLink className="w-4 h-4 mr-2" />
+              {selectedItem.url.includes("meta.com") ||
+              selectedItem.url.includes("facebook.com") ? (
+                <FaMeta className="w-4 h-4 mr-2" />
+              ) : selectedItem.url.includes("github.com") ? (
+                <FaGithub className="w-4 h-4 mr-2" />
+              ) : (
+                <ExternalLink className="w-4 h-4 mr-2" />
+              )}
               Visit Link
             </Button>
           )}
@@ -360,9 +369,14 @@ const Masonry = ({
 
       {isDesktop ? (
         <Dialog open={open} onOpenChange={setOpen}>
-          <DialogContent className="sm:max-w-[425px]">
+          <DialogContent className="sm:max-w-[600px]">
             <DialogHeader>
               <DialogTitle>{selectedItem?.name || "Item Details"}</DialogTitle>
+              {selectedItem?.description && (
+                <DialogDescription>
+                  {selectedItem.description}
+                </DialogDescription>
+              )}
             </DialogHeader>
             <ItemDetailContent />
           </DialogContent>
@@ -372,6 +386,11 @@ const Masonry = ({
           <DrawerContent>
             <DrawerHeader className="text-left">
               <DrawerTitle>{selectedItem?.name || "Item Details"}</DrawerTitle>
+              {selectedItem?.description && (
+                <DrawerDescription>
+                  {selectedItem.description}
+                </DrawerDescription>
+              )}
             </DrawerHeader>
             <div className="px-4">
               <ItemDetailContent />
