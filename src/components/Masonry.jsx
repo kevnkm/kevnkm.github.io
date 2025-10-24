@@ -1,5 +1,21 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { gsap } from "gsap";
+import { ExternalLink } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerFooter,
+} from "@/components/ui/drawer";
+import { Button } from "@/components/ui/button";
 
 const useMedia = (queries, values, defaultValue) => {
   const get = () =>
@@ -80,6 +96,9 @@ const Masonry = ({
   const [imagesReady, setImagesReady] = useState(false);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const animationTimeline = useRef(null);
+  const [open, setOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const isDesktop = useMedia(["(min-width: 768px)"], [true], false);
 
   const getInitialPosition = (item) => {
     const containerRect = containerRef.current?.getBoundingClientRect();
@@ -272,34 +291,108 @@ const Masonry = ({
     }
   };
 
-  return (
-    <div ref={containerRef} className="relative w-full h-full">
-      {grid.map((item) => (
-        <div
-          key={item.id}
-          data-key={item.id}
-          className="absolute p-1.5 cursor-pointer top-0 left-0 will-change-transform will-change-opacity"
-          onClick={() => window.open(item.url, "_blank", "noopener")}
-          onMouseEnter={(e) => handleMouseEnter(e, item)}
-          onMouseLeave={(e) => handleMouseLeave(e, item)}
-        >
-          {item.img ? (
-            <div
-              className="relative w-full h-full bg-cover bg-center rounded-lg shadow-xl border border-border"
-              style={{ backgroundImage: `url(${item.img})` }}
+  const handleItemClick = (item) => {
+    setSelectedItem(item);
+    setOpen(true);
+  };
+
+  const ItemDetailContent = () => {
+    if (!selectedItem) return null;
+
+    return (
+      <div className="space-y-4">
+        {selectedItem.img && (
+          <img
+            src={selectedItem.img}
+            alt={selectedItem.id}
+            className="w-full rounded-lg"
+          />
+        )}
+        <div className="space-y-2">
+          <p className="text-sm text-muted-foreground">
+            Item ID: {selectedItem.id}
+          </p>
+          {selectedItem.url && (
+            <Button
+              onClick={() =>
+                window.open(selectedItem.url, "_blank", "noopener")
+              }
+              className="w-full"
             >
-              {colorShiftOnHover && (
-                <div className="color-overlay absolute inset-0 bg-primary/20 opacity-0 pointer-events-none rounded-lg" />
-              )}
-            </div>
-          ) : (
-            <div className="relative w-full h-full bg-background text-foreground flex items-center justify-center rounded-lg shadow-xl border border-border uppercase text-[10px] leading-[10px]">
-              <span>No Image Available</span>
-            </div>
+              <ExternalLink className="w-4 h-4 mr-2" />
+              Visit Link
+            </Button>
           )}
         </div>
-      ))}
-    </div>
+      </div>
+    );
+  };
+
+  return (
+    <>
+      <div ref={containerRef} className="relative w-full h-full">
+        {grid.map((item) => (
+          <div
+            key={item.id}
+            data-key={item.id}
+            className="absolute p-1.5 cursor-pointer top-0 left-0 will-change-transform will-change-opacity"
+            onClick={() => handleItemClick(item)}
+            onMouseEnter={(e) => handleMouseEnter(e, item)}
+            onMouseLeave={(e) => handleMouseLeave(e, item)}
+          >
+            {item.img ? (
+              <div
+                className="relative w-full h-full bg-cover bg-center rounded-lg shadow-xl border border-border"
+                style={{ backgroundImage: `url(${item.img})` }}
+              >
+                {colorShiftOnHover && (
+                  <div className="color-overlay absolute inset-0 bg-primary/20 opacity-0 pointer-events-none rounded-lg" />
+                )}
+              </div>
+            ) : (
+              <div className="relative w-full h-full bg-background text-foreground flex items-center justify-center rounded-lg shadow-xl border border-border uppercase text-[10px] leading-[10px]">
+                <span>No Image Available</span>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {isDesktop ? (
+        <Dialog open={open} onOpenChange={setOpen}>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>{selectedItem?.name || "Item Details"}</DialogTitle>
+            </DialogHeader>
+            <ItemDetailContent />
+          </DialogContent>
+        </Dialog>
+      ) : (
+        <Drawer open={open} onOpenChange={setOpen}>
+          <DrawerContent>
+            <DrawerHeader className="text-left">
+              <DrawerTitle>{selectedItem?.name || "Item Details"}</DrawerTitle>
+            </DrawerHeader>
+            <div className="px-4">
+              <ItemDetailContent />
+            </div>
+            <DrawerFooter className="pt-2">
+              <DrawerClose asChild>
+                <Button variant="outline">Close</Button>
+              </DrawerClose>
+            </DrawerFooter>
+          </DrawerContent>
+        </Drawer>
+      )}
+
+      <style jsx global>{`
+        [data-radix-dialog-overlay],
+        [vaul-drawer-wrapper] [vaul-overlay] {
+          backdrop-filter: blur(10px) !important;
+          -webkit-backdrop-filter: blur(10px) !important;
+        }
+      `}</style>
+    </>
   );
 };
 
