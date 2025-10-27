@@ -79,7 +79,7 @@ const Home = () => {
                     Outside of work, I enjoy playing
                 </p>
                 <RotatingText
-                    texts={['basketball', 'instruments', 'chess', 'Smash Bros', 'board games', 'random card games that no one has heard of']}
+                    texts={['basketball', 'instruments🎹🎸', 'chess', 'Smash Bros', 'board games', 'random card games that no one has heard of']}
                     mainClassName="text-base md:text-lg  text-foreground overflow-hidden justify-center rounded-lg"
                     staggerFrom={"random"}
                     initial={{ y: "-100%" }}
