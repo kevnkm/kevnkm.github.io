@@ -340,33 +340,38 @@ const Masonry = ({
   return (
     <>
       <div ref={containerRef} className="relative w-full h-full">
-        {grid.map((item) => (
-          <div
-            key={item.id}
-            data-key={item.id}
-            className="absolute p-1.5 cursor-pointer top-0 left-0 will-change-transform will-change-opacity"
-            onClick={() => handleItemClick(item)}
-            onMouseEnter={(e) => handleMouseEnter(e, item)}
-            onMouseLeave={(e) => handleMouseLeave(e, item)}
-          >
-            {item.img ? (
-              <div
-                className="relative w-full h-full bg-cover bg-center rounded-lg shadow-xl border border-border"
-                style={{ backgroundImage: `url(${item.img})` }}
-              >
-                {colorShiftOnHover && (
-                  <div className="color-overlay absolute inset-0 bg-primary/20 opacity-0 pointer-events-none rounded-lg" />
-                )}
-              </div>
-            ) : (
-              <div className="relative w-full h-full bg-background text-foreground flex items-center justify-center rounded-lg shadow-xl border border-border uppercase text-[10px] leading-[10px]">
-                <span>No Image Available</span>
-              </div>
-            )}
-          </div>
-        ))}
+        {/* Only render grid after images are ready */}
+        {imagesReady &&
+          grid.length > 0 &&
+          grid.map((item) => (
+            <div
+              key={item.id}
+              data-key={item.id}
+              className="absolute p-1.5 cursor-pointer top-0 left-0 will-change-transform will-change-opacity"
+              onClick={() => handleItemClick(item)}
+              onMouseEnter={(e) => handleMouseEnter(e, item)}
+              onMouseLeave={(e) => handleMouseLeave(e, item)}
+            >
+              {item.img ? (
+                <div
+                  className="relative w-full h-full bg-cover bg-center rounded-lg shadow-xl border border-border"
+                  style={{ backgroundImage: `url(${item.img})` }}
+                >
+                  {colorShiftOnHover && (
+                    <div className="color-overlay absolute inset-0 bg-primary/20 opacity-0 pointer-events-none rounded-lg" />
+                  )}
+                </div>
+              ) : (
+                // Only show "No Image" if truly no image (not during preload)
+                <div className="relative w-full h-full bg-background text-foreground flex items-center justify-center rounded-lg shadow-xl border border-border uppercase text-[10px] leading-[10px]">
+                  <span>No Image Available</span>
+                </div>
+              )}
+            </div>
+          ))}
       </div>
 
+      {/* Dialog / Drawer */}
       {isDesktop ? (
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogContent className="sm:max-w-[600px]">
@@ -404,13 +409,17 @@ const Masonry = ({
         </Drawer>
       )}
 
-      <style jsx global>{`
-        [data-radix-dialog-overlay],
-        [vaul-drawer-wrapper] [vaul-overlay] {
-          backdrop-filter: blur(10px) !important;
-          -webkit-backdrop-filter: blur(10px) !important;
-        }
-      `}</style>
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+          [data-radix-dialog-overlay],
+          [vaul-drawer-wrapper] [vaul-overlay] {
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+          }
+        `,
+        }}
+      />
     </>
   );
 };
