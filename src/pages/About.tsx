@@ -49,15 +49,22 @@ export function About() {
     }, []);
 
     useEffect(() => {
-        if (ref.current) {
-            const rect = ref.current.getBoundingClientRect();
-            setHeight(rect.height);
-        }
+        const updateHeight = () => {
+            if (ref.current) {
+                const rect = ref.current.getBoundingClientRect();
+                setHeight(rect.height);
+            }
+        };
+
+        updateHeight();
+
+        window.addEventListener('resize', updateHeight);
+        return () => window.removeEventListener('resize', updateHeight);
     }, []);
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
-        offset: ["start 10%", "end 50%"],
+        offset: ["start start", "end end"],
     });
 
     const heightTransform = useTransform(scrollYProgress, [0, 1], [0, height]);
@@ -144,12 +151,9 @@ export function About() {
     ];
 
     return (
-        <div ref={containerRef} className="w-full text-foreground font-sans">
-            <div className="max-w-7xl mx-auto pt-20 px-4 md:px-8 lg:px-10">
-                <h1 className="text-2xl font-bold mb-8 text-foreground">
-                    About Me
-                </h1>
-                <p className="text-base font-normal text-muted-foreground">
+        <div ref={containerRef} className="max-w-4xl mx-auto text-foreground font-sans">
+            <div className="w-full mx-auto pt-24 px-4 md:px-8 lg:px-10 lg:pb-5">
+                <p className="text-base text-center font-normal text-muted-foreground">
                     I&apos;ve been building a couple of projects over the past few years. Here&apos;s
                     a timeline of my development journey.
                 </p>
@@ -159,7 +163,7 @@ export function About() {
                 {data.map((item, index) => (
                     <div
                         key={index}
-                        className="flex justify-start pt-10 md:pt-40 md:gap-10"
+                        className={`flex justify-start md:gap-10 ${index === 0 ? 'pt-10 md:pt-10' : 'pt-10 md:pt-20'}`}
                     >
                         <div className="sticky top-40 z-40 flex flex-col md:flex-row items-center self-start max-w-xs lg:max-w-sm md:w-full">
                             <div className="absolute left-3 md:left-3 h-10 w-10 rounded-full bg-card flex items-center justify-center">
