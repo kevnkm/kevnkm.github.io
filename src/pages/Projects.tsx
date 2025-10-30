@@ -196,48 +196,33 @@ const Masonry = ({ items }: { items: typeof projectItems }) => {
         if (!imagesReady || !grid.length) return;
 
         if (isInitialLoad) {
-            const tl = gsap.timeline({
-                onComplete: () => setIsInitialLoad(false),
-            });
-
-            grid.forEach((item, i) => {
+            grid.forEach((item) => {
                 const sel = `[data-key="${item.id}"]`;
                 gsap.set(sel, {
-                    opacity: 0,
-                    y: window.innerHeight + 100,
-                    scale: 0.9,
-                    filter: "blur(10px)",
-                });
-                tl.to(
-                    sel,
-                    {
-                        opacity: 1,
-                        x: item.x,
-                        y: item.y,
-                        width: item.w,
-                        height: item.h,
-                        scale: 1,
-                        filter: "blur(0px)",
-                        duration: 0.8,
-                        ease: "power3.out",
-                    },
-                    i * 0.05
-                );
-            });
-        } else {
-            // SMOOTH RESIZE: animate every item on every resize
-            grid.forEach((item) => {
-                gsap.to(`[data-key="${item.id}"]`, {
                     x: item.x,
                     y: item.y,
                     width: item.w,
                     height: item.h,
-                    duration: 0.6,
-                    ease: "power3.out",
-                    overwrite: "auto",
+                    opacity: 1,
+                    scale: 1,
+                    filter: "blur(0px)",
                 });
             });
+            setIsInitialLoad(false);
+            return;
         }
+
+        grid.forEach((item) => {
+            gsap.to(`[data-key="${item.id}"]`, {
+                x: item.x,
+                y: item.y,
+                width: item.w,
+                height: item.h,
+                duration: 0.6,
+                ease: "power3.out",
+                overwrite: "auto",
+            });
+        });
     }, [grid, imagesReady]);
 
     const handleHover = (id: string, enter: boolean) => {
