@@ -30,7 +30,7 @@ const ImageComponent = ({ src, alt }: { src?: string; alt: string }) => (
     />
 );
 
-export function About() {
+export function Timeline() {
     const ref = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const [height, setHeight] = useState(0);

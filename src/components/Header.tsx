@@ -6,7 +6,7 @@ import logo from "../images/kevnkm_icon.png";
 const menuItems = [
     { label: "Home", ariaLabel: "Welcome", href: "/" },
     { label: "Projects", ariaLabel: "View my projects", href: "/projects" },
-    { label: "About", ariaLabel: "Learn about me", href: "/about" },
+    { label: "Timeline", ariaLabel: "View my timeline", href: "/timeline" },
     { label: "Contact", ariaLabel: "Get in touch", href: "/contact" },
 ];
 
