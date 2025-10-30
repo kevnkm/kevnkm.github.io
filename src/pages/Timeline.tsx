@@ -1,33 +1,60 @@
+// Timeline.tsx
 import { useEffect, useRef, useState } from "react";
 import { useScroll, useTransform, motion } from "motion/react";
-import labbitImage from "@/images/labbit/labbit_1.png";
-import specialRelativityImage from "@/images/specialrelativity/specialrelativity_13.gif";
-import huetopiaImage from "@/images/huetopia/huetopia_0.png";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+} from "@/components/ui/dialog";
+import {
+    Drawer,
+    DrawerClose,
+    DrawerContent,
+    DrawerDescription,
+    DrawerHeader,
+    DrawerTitle,
+    DrawerFooter,
+} from "@/components/ui/drawer";
+import { Button } from "@/components/ui/button";
+import { FaMeta, FaGithub } from "react-icons/fa6";
+import { ExternalLink } from "lucide-react";
+
 import graduationImage from "@/images/me/graduation.jpg";
-import graphicsImage from "@/images/graphics/graphics_1.gif";
-import ocdSimulationImage from "@/images/ocdsimulation/ocd_1.gif";
-import apparelDesignImage from "@/images/appareldesign/appareldesign_1.gif";
+import { PROJECTS, getProjectById, type Project } from "@/data/projects";
 
 const preloadImages = async (urls: string[]) => {
     await Promise.all(
-        urls.map((src) =>
-            new Promise<void>((resolve) => {
-                const img = new Image();
-                img.src = src;
-                img.onload = img.onerror = () => resolve();
-            })
+        urls.map(
+            (src) =>
+                new Promise<void>((resolve) => {
+                    const img = new Image();
+                    img.src = src;
+                    img.onload = img.onerror = () => resolve();
+                })
         )
     );
 };
 
-const ImageComponent = ({ src, alt }: { src?: string; alt: string }) => (
-    <img
-        src={src}
-        alt={alt}
-        width={200}
-        height={200}
-        className="h-24 w-48 rounded-lg object-cover sm:h-32 sm:w-64 md:h-40 md:w-80 transition-transform hover:scale-105"
-    />
+const ImageComponent = ({
+    item,
+    onOpen,
+}: {
+    item: Project;
+    onOpen: (i: Project) => void;
+}) => (
+    <button
+        onClick={() => onOpen(item)}
+        className="group block focus:outline-none cursor-pointer">
+        <img
+            src={item.img}
+            alt={item.name}
+            width={200}
+            height={200}
+            className="h-24 w-48 rounded-lg object-cover sm:h-32 sm:w-64 md:h-40 md:w-80 transition-transform group-hover:scale-95"
+        />
+    </button>
 );
 
 export function Timeline() {
@@ -35,31 +62,29 @@ export function Timeline() {
     const containerRef = useRef<HTMLDivElement>(null);
     const [height, setHeight] = useState(0);
 
-    const imageUrls = [
-        labbitImage,
-        specialRelativityImage,
-        huetopiaImage,
-        graduationImage,
-        ocdSimulationImage,
-        apparelDesignImage,
-    ];
+    const [open, setOpen] = useState(false);
+    const [selected, setSelected] = useState<Project | null>(null);
+    const isDesktop = typeof window !== "undefined"
+        ? window.matchMedia("(min-width: 768px)").matches
+        : true;
+
+    const openDetail = (item: Project) => {
+        setSelected(item);
+        setOpen(true);
+    };
 
     useEffect(() => {
-        preloadImages(imageUrls);
+        const urls = [graduationImage, ...PROJECTS.map((p) => p.img!).filter(Boolean)];
+        preloadImages(urls);
     }, []);
 
     useEffect(() => {
         const updateHeight = () => {
-            if (ref.current) {
-                const rect = ref.current.getBoundingClientRect();
-                setHeight(rect.height);
-            }
+            if (ref.current) setHeight(ref.current.getBoundingClientRect().height);
         };
-
         updateHeight();
-
-        window.addEventListener('resize', updateHeight);
-        return () => window.removeEventListener('resize', updateHeight);
+        window.addEventListener("resize", updateHeight);
+        return () => window.removeEventListener("resize", updateHeight);
     }, []);
 
     const { scrollYProgress } = useScroll({
@@ -70,15 +95,15 @@ export function Timeline() {
     const heightTransform = useTransform(scrollYProgress, [0, 1], [0, height]);
     const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
 
+    /* Timeline entries using shared project data */
     const data = [
         {
             title: "Now",
             content: (
-                <div>
-                    <p className="text-base font-normal text-muted-foreground mb-6">
-                        Focusing on building an AI-powered productivity platform that gamifies note-taking and problem-solving.
-                    </p>
-                </div>
+                <p className="text-base font-normal text-muted-foreground mb-6">
+                    Focusing on building an AI-powered productivity platform that gamifies
+                    note-taking and problem-solving.
+                </p>
             ),
         },
         {
@@ -89,8 +114,8 @@ export function Timeline() {
                         Developed Labbit, Arcadex, and special relativity education module.
                     </p>
                     <div className="flex flex-wrap justify-start gap-4">
-                        <ImageComponent src={labbitImage} alt="Labbit" />
-                        <ImageComponent src={specialRelativityImage} alt="Special Relativity" />
+                        <ImageComponent item={getProjectById("labbit")!} onOpen={openDetail} />
+                        <ImageComponent item={getProjectById("special-relativity")!} onOpen={openDetail} />
                     </div>
                 </div>
             ),
@@ -103,7 +128,7 @@ export function Timeline() {
                         Developed and launched Huetopia.
                     </p>
                     <div className="flex flex-wrap justify-start gap-4">
-                        <ImageComponent src={huetopiaImage} alt="Huetopia" />
+                        <ImageComponent item={getProjectById("huetopia")!} onOpen={openDetail} />
                     </div>
                 </div>
             ),
@@ -116,7 +141,13 @@ export function Timeline() {
                         Graduated from Cornell!
                     </p>
                     <div className="flex flex-wrap justify-start gap-4">
-                        <ImageComponent src={graduationImage} alt="Cornell" />
+                        <button onClick={() => openDetail({ id: "grad", name: "Graduation", img: graduationImage, height: 400 })}>
+                            <img
+                                src={graduationImage}
+                                alt="Graduation"
+                                className="h-24 w-48 rounded-lg object-cover sm:h-32 sm:w-64 md:h-40 md:w-80 transition-transform hover:scale-105"
+                            />
+                        </button>
                     </div>
                 </div>
             ),
@@ -126,10 +157,10 @@ export function Timeline() {
             content: (
                 <div>
                     <p className="text-base font-normal text-muted-foreground mb-6">
-                        Explored foundational concepts of computer graphics through a couple of graphics programming projects.
+                        Explored foundational concepts of computer graphics.
                     </p>
                     <div className="flex flex-wrap justify-start gap-4">
-                        <ImageComponent src={graphicsImage} alt="Graphics" />
+                        <ImageComponent item={getProjectById("graphics")!} onOpen={openDetail} />
                     </div>
                 </div>
             ),
@@ -142,12 +173,12 @@ export function Timeline() {
                         Engaged in VR development by building an OCD simulation module and an apparel design education module.
                     </p>
                     <div className="flex flex-wrap justify-start gap-4">
-                        <ImageComponent src={ocdSimulationImage} alt="OCD Simulation" />
-                        <ImageComponent src={apparelDesignImage} alt="Apparel Design" />
+                        <ImageComponent item={getProjectById("ocd")!} onOpen={openDetail} />
+                        <ImageComponent item={getProjectById("apparel")!} onOpen={openDetail} />
                     </div>
                 </div>
             ),
-        }
+        },
     ];
 
     return (
@@ -199,6 +230,83 @@ export function Timeline() {
                     />
                 </div>
             </div>
+
+            {isDesktop ? (
+                <Dialog open={open} onOpenChange={setOpen}>
+                    <DialogContent className="sm:max-w-xl">
+                        <DialogHeader>
+                            <DialogTitle>{selected?.name}</DialogTitle>
+                            {selected?.description && (
+                                <DialogDescription>{selected.description}</DialogDescription>
+                            )}
+                        </DialogHeader>
+                        <div className="space-y-4 py-4">
+                            {selected?.img && (
+                                <img
+                                    src={selected.img}
+                                    alt={selected.name}
+                                    className="w-full rounded-lg aspect-video object-cover"
+                                />
+                            )}
+                            {selected?.url && (
+                                <Button
+                                    className="w-full"
+                                    onClick={() => window.open(selected.url, "_blank")}
+                                >
+                                    {selected.url.includes("meta.com") ? (
+                                        <FaMeta className="w-4 h-4 mr-2" />
+                                    ) : selected.url.includes("github.com") ? (
+                                        <FaGithub className="w-4 h-4 mr-2" />
+                                    ) : (
+                                        <ExternalLink className="w-4 h-4 mr-2" />
+                                    )}
+                                    View Project
+                                </Button>
+                            )}
+                        </div>
+                    </DialogContent>
+                </Dialog>
+            ) : (
+                <Drawer open={open} onOpenChange={setOpen}>
+                    <DrawerContent>
+                        <DrawerHeader>
+                            <DrawerTitle>{selected?.name}</DrawerTitle>
+                            {selected?.description && (
+                                <DrawerDescription>{selected.description}</DrawerDescription>
+                            )}
+                        </DrawerHeader>
+                        <div className="p-4 space-y-4">
+                            {selected?.img && (
+                                <img
+                                    src={selected.img}
+                                    alt={selected.name}
+                                    className="w-full rounded-lg aspect-video object-cover"
+                                />
+                            )}
+                            {selected?.url && (
+                                <Button
+                                    className="w-full"
+                                    onClick={() => window.open(selected.url, "_blank")}
+                                >
+                                    {selected.url.includes("meta.com") ? (
+                                        <FaMeta className="w-4 h-4 mr-2" />
+                                    ) : selected.url.includes("github.com") ? (
+                                        <FaGithub className="w-4 h-4 mr-2" />
+                                    ) : (
+                                        <ExternalLink className="w-4 h-4 mr-2" />
+                                    )}
+                                    View Project
+                                </Button>
+                            )}
+                        </div>
+                        <DrawerFooter>
+                            <DrawerClose asChild>
+                                <Button variant="outline" className="w-full">Close</Button>
+                            </DrawerClose>
+                        </DrawerFooter>
+                    </DrawerContent>
+                </Drawer>
+            )}
         </div>
     );
 }
