@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { Timeline } from "@/components/ui/timeline";
+import { useEffect, useRef, useState } from "react";
+import { useScroll, useTransform, motion } from "motion/react";
 import labbitImage from "@/images/labbit/labbit_1.png";
 import specialRelativityImage from "@/images/specialrelativity/specialrelativity_13.gif";
 import huetopiaImage from "@/images/huetopia/huetopia_0.png";
@@ -31,6 +31,10 @@ const ImageComponent = ({ src, alt }: { src?: string; alt: string }) => (
 );
 
 export function About() {
+    const ref = useRef<HTMLDivElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [height, setHeight] = useState(0);
+
     const imageUrls = [
         labbitImage,
         specialRelativityImage,
@@ -44,6 +48,21 @@ export function About() {
         preloadImages(imageUrls);
     }, []);
 
+    useEffect(() => {
+        if (ref.current) {
+            const rect = ref.current.getBoundingClientRect();
+            setHeight(rect.height);
+        }
+    }, []);
+
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start 10%", "end 50%"],
+    });
+
+    const heightTransform = useTransform(scrollYProgress, [0, 1], [0, height]);
+    const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
+
     const data = [
         {
             title: "Now",
@@ -52,8 +71,6 @@ export function About() {
                     <p className="text-base font-normal text-muted-foreground mb-6">
                         Focusing on building an AI-powered productivity platform that gamifies note-taking and problem-solving.
                     </p>
-                    <div className="flex flex-wrap justify-start gap-4">
-                    </div>
                 </div>
             ),
         },
@@ -127,9 +144,56 @@ export function About() {
     ];
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center p-4">
-            <div className="w-full max-w-4xl">
-                <Timeline data={data} />
+        <div ref={containerRef} className="w-full text-foreground font-sans">
+            <div className="max-w-7xl mx-auto pt-20 px-4 md:px-8 lg:px-10">
+                <h1 className="text-2xl font-bold mb-8 text-foreground">
+                    About Me
+                </h1>
+                <p className="text-base font-normal text-muted-foreground">
+                    I&apos;ve been building a couple of projects over the past few years. Here&apos;s
+                    a timeline of my development journey.
+                </p>
+            </div>
+
+            <div ref={ref} className="relative max-w-7xl mx-auto pb-20">
+                {data.map((item, index) => (
+                    <div
+                        key={index}
+                        className="flex justify-start pt-10 md:pt-40 md:gap-10"
+                    >
+                        <div className="sticky top-40 z-40 flex flex-col md:flex-row items-center self-start max-w-xs lg:max-w-sm md:w-full">
+                            <div className="absolute left-3 md:left-3 h-10 w-10 rounded-full bg-card flex items-center justify-center">
+                                <div className="h-4 w-4 rounded-full bg-muted border border-border" />
+                            </div>
+                            <h3 className="hidden md:block pl-20 text-xl md:text-5xl font-bold text-foreground">
+                                {item.title}
+                            </h3>
+                        </div>
+
+                        <div className="relative pl-20 pr-4 md:pl-4 w-full">
+                            <h3 className="md:hidden block text-2xl mb-4 text-left font-bold text-foreground">
+                                {item.title}
+                            </h3>
+                            {item.content}
+                        </div>
+                    </div>
+                ))}
+
+                <div
+                    style={{ height: height + "px" }}
+                    className="absolute md:left-8 left-8 top-0 w-[2px] overflow-hidden
+                        bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))]
+                        from-transparent via-border to-transparent
+                        [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)]"
+                >
+                    <motion.div
+                        style={{
+                            height: heightTransform,
+                            opacity: opacityTransform,
+                        }}
+                        className="absolute inset-x-0 top-0 w-[2px] bg-gradient-to-t from-primary via-accent to-transparent rounded-full"
+                    />
+                </div>
             </div>
         </div>
     );
