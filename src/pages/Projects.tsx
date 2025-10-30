@@ -3,6 +3,7 @@ import Masonry from "@/components/Masonry";
 import huetopiaImage from "@/images/huetopia/huetopia_0.png";
 import specialRelativityImage from "@/images/specialrelativity/specialrelativity_13.gif";
 import labbitImage from "@/images/labbit/labbit_1.png";
+import graphicsImage from "@/images/graphics/graphics_1.gif";
 import apparelDesignImage from "@/images/appareldesign/appareldesign_1.gif";
 import ocdSimulationImage from "@/images/ocdsimulation/ocd_1.gif";
 
@@ -49,6 +50,7 @@ const projectItems = [
         id: "4",
         name: "GraphicsHub",
         description: "A collection of interactive graphics and visualizations.",
+        img: graphicsImage,
         url: "https://kevnkm.github.io/graphics/",
         height: 400,
     },
