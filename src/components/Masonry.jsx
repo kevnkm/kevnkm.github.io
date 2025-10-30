@@ -172,30 +172,18 @@ const Masonry = ({
   useLayoutEffect(() => {
     if (!imagesReady || grid.length === 0) return;
 
-    if (animationTimeline.current) {
-      animationTimeline.current.kill();
-    }
+    if (isInitialLoad) {
+      const tl = gsap.timeline({
+        onComplete: () => {
+          setIsInitialLoad(false);
+        },
+      });
 
-    const tl = gsap.timeline({
-      onComplete: () => {
-        setIsInitialLoad(false);
-      },
-    });
+      grid.forEach((item, index) => {
+        const selector = `[data-key="${item.id}"]`;
+        const element = document.querySelector(selector);
+        if (!element) return;
 
-    grid.forEach((item, index) => {
-      const selector = `[data-key="${item.id}"]`;
-      const element = document.querySelector(selector);
-
-      if (!element) return;
-
-      const animationProps = {
-        x: item.x,
-        y: item.y,
-        width: item.w,
-        height: item.h,
-      };
-
-      if (isInitialLoad) {
         const initialPos = getInitialPosition(item);
 
         gsap.set(selector, {
@@ -212,7 +200,10 @@ const Masonry = ({
           selector,
           {
             opacity: 1,
-            ...animationProps,
+            x: item.x,
+            y: item.y,
+            width: item.w,
+            height: item.h,
             scale: 1,
             ...(blurToFocus && { filter: "blur(0px)" }),
             duration: 0.8,
@@ -220,33 +211,24 @@ const Masonry = ({
           },
           index * stagger
         );
-      } else {
+      });
+
+      animationTimeline.current = tl;
+    } else {
+      grid.forEach((item) => {
+        const selector = `[data-key="${item.id}"]`;
         gsap.to(selector, {
-          ...animationProps,
-          duration: duration,
-          ease: ease,
+          x: item.x,
+          y: item.y,
+          width: item.w,
+          height: item.h,
+          duration,
+          ease,
           overwrite: "auto",
         });
-      }
-    });
-
-    animationTimeline.current = tl;
-
-    return () => {
-      if (animationTimeline.current) {
-        animationTimeline.current.kill();
-      }
-    };
-  }, [
-    grid,
-    imagesReady,
-    isInitialLoad,
-    stagger,
-    animateFrom,
-    blurToFocus,
-    duration,
-    ease,
-  ]);
+      });
+    }
+  }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease]);
 
   const handleMouseEnter = (e, item) => {
     const element = e.currentTarget;
