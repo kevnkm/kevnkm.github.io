@@ -4,6 +4,7 @@ import labbitImage from "@/images/labbit/labbit_1.png";
 import specialRelativityImage from "@/images/specialrelativity/specialrelativity_13.gif";
 import huetopiaImage from "@/images/huetopia/huetopia_0.png";
 import graduationImage from "@/images/me/graduation.jpg";
+import graphicsImage from "@/images/graphics/graphics_1.gif";
 import ocdSimulationImage from "@/images/ocdsimulation/ocd_1.gif";
 import apparelDesignImage from "@/images/appareldesign/appareldesign_1.gif";
 
@@ -104,6 +105,7 @@ export function About() {
                         Explored foundational concepts of computer graphics through a couple of graphics programming projects.
                     </p>
                     <div className="flex flex-wrap justify-start gap-4">
+                        <ImageComponent src={graphicsImage} alt="Graphics" />
                     </div>
                 </div>
             ),
