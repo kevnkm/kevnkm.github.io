@@ -46,7 +46,7 @@ export const PROJECTS: Project[] = [
     id: "labbit",
     name: "Labbit",
     description:
-      "A gamified learning app that help users learn physics concepts through interactive experiments and challenges.",
+      "A gamified learning app that helps users learn physics through interactive quizzes and experiments.",
     img: labbitImage,
     url: "https://www.cubeloom.com/",
     height: 500,
