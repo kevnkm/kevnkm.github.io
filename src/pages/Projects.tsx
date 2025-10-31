@@ -1,26 +1,7 @@
 import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { gsap } from "gsap";
-import { ExternalLink } from "lucide-react";
-import { FaMeta, FaGithub } from "react-icons/fa6";
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-} from "@/components/ui/dialog";
-import {
-    Drawer,
-    DrawerClose,
-    DrawerContent,
-    DrawerDescription,
-    DrawerHeader,
-    DrawerTitle,
-    DrawerFooter,
-} from "@/components/ui/drawer";
-import { Button } from "@/components/ui/button";
+import { ProjectDetail } from "@/components/ProjectDetail";
 import { Spinner } from "@/components/ui/spinner";
-
 import { PROJECTS } from "@/data/projects";
 
 // === HOOKS ===
@@ -81,7 +62,6 @@ const Masonry = ({ items }: { items: typeof PROJECTS }) => {
     const [isInitialLoad, setIsInitialLoad] = useState(true);
     const [open, setOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState<any>(null);
-    const isDesktop = useMedia(["(min-width: 768px)"], [true], false);
 
     // Preload
     useEffect(() => {
@@ -207,66 +187,11 @@ const Masonry = ({ items }: { items: typeof PROJECTS }) => {
             </div>
 
             {/* MODAL */}
-            {isDesktop ? (
-                <Dialog open={open} onOpenChange={setOpen}>
-                    <DialogContent className="sm:max-w-xl">
-                        <DialogHeader>
-                            <DialogTitle>{selectedItem?.name}</DialogTitle>
-                            {selectedItem?.description && (
-                                <DialogDescription>{selectedItem.description}</DialogDescription>
-                            )}
-                        </DialogHeader>
-                        <div className="space-y-4 py-4">
-                            {selectedItem?.img && (
-                                <img src={selectedItem.img} alt={selectedItem.name} className="w-full rounded-lg aspect-video object-cover" />
-                            )}
-                            {selectedItem?.url && (
-                                <Button className="w-full" onClick={() => window.open(selectedItem.url, "_blank")}>
-                                    {selectedItem.url.includes("meta.com") ? (
-                                        <FaMeta className="w-4 h-4 mr-2" />
-                                    ) : selectedItem.url.includes("github.com") ? (
-                                        <FaGithub className="w-4 h-4 mr-2" />
-                                    ) : (
-                                        <ExternalLink className="w-4 h-4 mr-2" />
-                                    )}
-                                    View Project
-                                </Button>
-                            )}
-                        </div>
-                    </DialogContent>
-                </Dialog>
-            ) : (
-                <Drawer open={open} onOpenChange={setOpen}>
-                    <DrawerContent>
-                        <DrawerHeader>
-                            <DrawerTitle>{selectedItem?.name}</DrawerTitle>
-                            {selectedItem?.description && <DrawerDescription>{selectedItem.description}</DrawerDescription>}
-                        </DrawerHeader>
-                        <div className="p-4 space-y-4">
-                            {selectedItem?.img && (
-                                <img src={selectedItem.img} alt={selectedItem.name} className="w-full rounded-lg aspect-video object-cover" />
-                            )}
-                            {selectedItem?.url && (
-                                <Button className="w-full" onClick={() => window.open(selectedItem.url, "_blank")}>
-                                    {selectedItem.url.includes("meta.com") ? (
-                                        <FaMeta className="w-4 h-4 mr-2" />
-                                    ) : selectedItem.url.includes("github.com") ? (
-                                        <FaGithub className="w-4 h-4 mr-2" />
-                                    ) : (
-                                        <ExternalLink className="w-4 h-4 mr-2" />
-                                    )}
-                                    View Project
-                                </Button>
-                            )}
-                        </div>
-                        <DrawerFooter>
-                            <DrawerClose asChild>
-                                <Button variant="outline" className="w-full">Close</Button>
-                            </DrawerClose>
-                        </DrawerFooter>
-                    </DrawerContent>
-                </Drawer>
-            )}
+            <ProjectDetail
+                open={open}
+                onOpenChange={setOpen}
+                project={selectedItem}
+            />
         </>
     );
 };

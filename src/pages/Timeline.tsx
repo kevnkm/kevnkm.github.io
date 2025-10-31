@@ -1,26 +1,7 @@
 // Timeline.tsx
 import { useEffect, useRef, useState } from "react";
 import { useScroll, useTransform, motion } from "motion/react";
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-} from "@/components/ui/dialog";
-import {
-    Drawer,
-    DrawerClose,
-    DrawerContent,
-    DrawerDescription,
-    DrawerHeader,
-    DrawerTitle,
-    DrawerFooter,
-} from "@/components/ui/drawer";
-import { Button } from "@/components/ui/button";
-import { FaMeta, FaGithub } from "react-icons/fa6";
-import { ExternalLink } from "lucide-react";
-
+import { ProjectDetail } from "@/components/ProjectDetail";
 import graduationImage from "@/images/me/graduation.jpg";
 import { PROJECTS, getProjectById, type Project } from "@/data/projects";
 
@@ -64,9 +45,6 @@ export function Timeline() {
 
     const [open, setOpen] = useState(false);
     const [selected, setSelected] = useState<Project | null>(null);
-    const isDesktop = typeof window !== "undefined"
-        ? window.matchMedia("(min-width: 768px)").matches
-        : true;
 
     const openDetail = (item: Project) => {
         setSelected(item);
@@ -231,82 +209,11 @@ export function Timeline() {
                 </div>
             </div>
 
-            {isDesktop ? (
-                <Dialog open={open} onOpenChange={setOpen}>
-                    <DialogContent className="sm:max-w-xl">
-                        <DialogHeader>
-                            <DialogTitle>{selected?.name}</DialogTitle>
-                            {selected?.description && (
-                                <DialogDescription>{selected.description}</DialogDescription>
-                            )}
-                        </DialogHeader>
-                        <div className="space-y-4 py-4">
-                            {selected?.img && (
-                                <img
-                                    src={selected.img}
-                                    alt={selected.name}
-                                    className="w-full rounded-lg aspect-video object-cover"
-                                />
-                            )}
-                            {selected?.url && (
-                                <Button
-                                    className="w-full"
-                                    onClick={() => window.open(selected.url, "_blank")}
-                                >
-                                    {selected.url.includes("meta.com") ? (
-                                        <FaMeta className="w-4 h-4 mr-2" />
-                                    ) : selected.url.includes("github.com") ? (
-                                        <FaGithub className="w-4 h-4 mr-2" />
-                                    ) : (
-                                        <ExternalLink className="w-4 h-4 mr-2" />
-                                    )}
-                                    View Project
-                                </Button>
-                            )}
-                        </div>
-                    </DialogContent>
-                </Dialog>
-            ) : (
-                <Drawer open={open} onOpenChange={setOpen}>
-                    <DrawerContent>
-                        <DrawerHeader>
-                            <DrawerTitle>{selected?.name}</DrawerTitle>
-                            {selected?.description && (
-                                <DrawerDescription>{selected.description}</DrawerDescription>
-                            )}
-                        </DrawerHeader>
-                        <div className="p-4 space-y-4">
-                            {selected?.img && (
-                                <img
-                                    src={selected.img}
-                                    alt={selected.name}
-                                    className="w-full rounded-lg aspect-video object-cover"
-                                />
-                            )}
-                            {selected?.url && (
-                                <Button
-                                    className="w-full"
-                                    onClick={() => window.open(selected.url, "_blank")}
-                                >
-                                    {selected.url.includes("meta.com") ? (
-                                        <FaMeta className="w-4 h-4 mr-2" />
-                                    ) : selected.url.includes("github.com") ? (
-                                        <FaGithub className="w-4 h-4 mr-2" />
-                                    ) : (
-                                        <ExternalLink className="w-4 h-4 mr-2" />
-                                    )}
-                                    View Project
-                                </Button>
-                            )}
-                        </div>
-                        <DrawerFooter>
-                            <DrawerClose asChild>
-                                <Button variant="outline" className="w-full">Close</Button>
-                            </DrawerClose>
-                        </DrawerFooter>
-                    </DrawerContent>
-                </Drawer>
-            )}
+            <ProjectDetail
+                open={open}
+                onOpenChange={setOpen}
+                project={selected}
+            />
         </div>
     );
 }
