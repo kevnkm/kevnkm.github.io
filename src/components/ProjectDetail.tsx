@@ -1,7 +1,7 @@
 // src/components/ProjectDetail.tsx
 
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerFooter } from "@/components/ui/drawer";
+import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 import { FaMeta, FaGithub } from "react-icons/fa6";
 import { ExternalLink } from "lucide-react";
@@ -29,54 +29,69 @@ export const ProjectDetail = ({ open, onOpenChange, project }: ProjectDetailProp
             ? FaGithub
             : ExternalLink;
 
-    const ModalContent = (
-        <>
-            <DialogHeader className="sm:hidden md:block">
-                <DialogTitle>{project.name}</DialogTitle>
-                {project.description && <DialogDescription>{project.description}</DialogDescription>}
-            </DialogHeader>
-
-            <DrawerHeader className="md:hidden">
-                <DrawerTitle>{project.name}</DrawerTitle>
-                {project.description && <DrawerDescription>{project.description}</DrawerDescription>}
-            </DrawerHeader>
-
-            <div className="space-y-4 py-4">
-                {project.img && (
-                    <img
-                        src={project.img}
-                        alt={project.name}
-                        className="w-full rounded-lg aspect-video object-cover"
-                    />
-                )}
-                {project.url && (
-                    <Button className="w-full" onClick={() => window.open(project.url, "_blank")}>
-                        <Icon className="w-4 h-4 mr-2" />
-                        View Project
-                    </Button>
-                )}
-            </div>
-
-            {/* Drawer only needs a footer */}
-            {(!isDesktop) && (
-                <DrawerFooter>
-                    <DrawerClose asChild>
-                        <Button variant="outline" className="w-full">
-                            Close
-                        </Button>
-                    </DrawerClose>
-                </DrawerFooter>
-            )}
-        </>
-    );
-
     return isDesktop ? (
         <Dialog open={open} onOpenChange={onOpenChange}>
-            <DialogContent className="sm:max-w-xl">{ModalContent}</DialogContent>
+            <DialogContent className="sm:max-w-xl gap-4">
+                <DialogHeader className="space-y-2">
+                    <DialogTitle className="text-xl">{project.name}</DialogTitle>
+                    {project.description && (
+                        <DialogDescription className="text-sm">
+                            {project.description}
+                        </DialogDescription>
+                    )}
+                </DialogHeader>
+
+                <div className="space-y-6">
+                    {project.img && (
+                        <img
+                            src={project.img}
+                            alt={project.name}
+                            className="w-full rounded-lg aspect-video object-cover shadow-sm"
+                        />
+                    )}
+                    {project.url && (
+                        <Button
+                            className="w-full h-11 text-base font-medium gap-2"
+                            onClick={() => window.open(project.url, "_blank")}
+                        >
+                            <Icon className="w-4 h-4" />
+                            View Project
+                        </Button>
+                    )}
+                </div>
+            </DialogContent>
         </Dialog>
     ) : (
         <Drawer open={open} onOpenChange={onOpenChange}>
-            <DrawerContent>{ModalContent}</DrawerContent>
+            <DrawerContent className="pb-8">
+                <DrawerHeader className="space-y-2 text-left">
+                    <DrawerTitle className="text-xl">{project.name}</DrawerTitle>
+                    {project.description && (
+                        <DrawerDescription className="text-sm">
+                            {project.description}
+                        </DrawerDescription>
+                    )}
+                </DrawerHeader>
+
+                <div className="space-y-6 px-6">
+                    {project.img && (
+                        <img
+                            src={project.img}
+                            alt={project.name}
+                            className="w-full rounded-lg aspect-video object-cover shadow-sm"
+                        />
+                    )}
+                    {project.url && (
+                        <Button
+                            className="w-full h-11 text-base font-medium gap-2"
+                            onClick={() => window.open(project.url, "_blank")}
+                        >
+                            <Icon className="w-4 h-4" />
+                            View Project
+                        </Button>
+                    )}
+                </div>
+            </DrawerContent>
         </Drawer>
     );
 };
