@@ -19,6 +19,7 @@ import {
     DrawerFooter,
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
+import { Spinner } from "@/components/ui/spinner";
 
 import { PROJECTS } from "@/data/projects";
 
@@ -164,8 +165,16 @@ const Masonry = ({ items }: { items: typeof PROJECTS }) => {
             <div
                 ref={containerRef}
                 className="relative w-full max-w-7xl mx-auto overflow-hidden"
-                style={{ height: gridHeight || 600 }}
+                style={{ height: imagesReady ? gridHeight : 600 }}
             >
+                {!imagesReady && (
+                    <div className="fixed inset-0 flex items-center justify-center z-50">
+                        <div className="flex flex-col items-center gap-3">
+                            <Spinner />
+                            <span className="text-sm text-muted-foreground">Loading projects...</span>
+                        </div>
+                    </div>
+                )}
                 {imagesReady &&
                     grid.map((item) => (
                         <div
