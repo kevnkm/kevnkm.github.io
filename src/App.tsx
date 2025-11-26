@@ -1,7 +1,6 @@
 import "./App.css";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import { Timeline } from "./pages/Timeline";
 import Projects from "./pages/Projects";
 import Contact from "./pages/Contact";
 import Header from "./components/Header";
@@ -16,7 +15,6 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/projects" element={<Projects />} />
-            <Route path="/timeline" element={<Timeline />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </div>
