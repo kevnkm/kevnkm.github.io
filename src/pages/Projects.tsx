@@ -73,10 +73,17 @@ const Masonry = ({ items }: { items: typeof PROJECTS }) => {
         preloadImages(urls).then(() => setImagesReady(true));
     }, [items]);
 
-    // Grid + Height
     const isReady = imagesReady && width > 100;
 
     // Compute grid only when ready
+    const estimatedHeight = useMemo(() => {
+        const avgItemHeight = 420;
+        const gap = 12;
+        const itemsPerColumn = Math.ceil(items.length / Math.max(columns, 1));
+        return Math.max(800, itemsPerColumn * (avgItemHeight + gap));
+    }, [items.length, columns]);
+
+    // Compute grid
     const { grid, gridHeight } = useMemo(() => {
         if (!isReady) return { grid: [], gridHeight: 0 };
 
@@ -87,23 +94,23 @@ const Masonry = ({ items }: { items: typeof PROJECTS }) => {
         const built = items.map((item) => {
             const col = colHeights.indexOf(Math.min(...colHeights));
             const x = col * colWidth + gap / 2;
-            const h = item.height / 2;
+            const h = item.height ? item.height / 2 : 420;
             const y = colHeights[col];
             colHeights[col] += h + gap;
+
             return { ...item, x, y, w: colWidth - gap, h };
         });
 
         return { grid: built, gridHeight: Math.max(...colHeights) };
     }, [width, columns, items, isReady]);
 
-    // GSAP: Only run once layout is stable
+    // GSAP layout
     useLayoutEffect(() => {
         if (!isReady || !grid.length) return;
 
         if (isInitialLoad) {
             grid.forEach((item) => {
-                const sel = `[data-key="${item.id}"]`;
-                gsap.set(sel, {
+                gsap.set(`[data-key="${item.id}"]`, {
                     x: item.x,
                     y: item.y,
                     width: item.w,
@@ -119,7 +126,7 @@ const Masonry = ({ items }: { items: typeof PROJECTS }) => {
                     y: item.y,
                     width: item.w,
                     height: item.h,
-                    duration: 0.6,
+                    duration: 0.7,
                     ease: "power3.out",
                     overwrite: "auto",
                 });
@@ -130,7 +137,7 @@ const Masonry = ({ items }: { items: typeof PROJECTS }) => {
     const handleHover = (id: string, enter: boolean) => {
         gsap.to(`[data-key="${id}"]`, {
             scale: enter ? 0.95 : 1,
-            duration: 0.3,
+            duration: 0.4,
             ease: "power2.out",
         });
     };
@@ -145,12 +152,16 @@ const Masonry = ({ items }: { items: typeof PROJECTS }) => {
             <div
                 ref={containerRef}
                 className="relative w-full max-w-7xl mx-auto overflow-hidden"
-                style={{ height: isReady ? gridHeight : 600 }}
+                style={{
+                    // This is the magic line
+                    height: isReady ? gridHeight : estimatedHeight,
+                    transition: "height 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
+                }}
             >
                 {/* Loading State */}
                 {!isReady && (
                     <div className="fixed inset-0 flex items-center justify-center z-50 bg-background">
-                        <div className="flex flex-col items-center gap-3">
+                        <div className="flex flex-col items-center gap-4">
                             <Spinner />
                             <span className="text-sm text-muted-foreground">Loading projects...</span>
                         </div>
@@ -163,9 +174,9 @@ const Masonry = ({ items }: { items: typeof PROJECTS }) => {
                         <div
                             key={item.id}
                             data-key={item.id}
-                            className="absolute cursor-pointer will-change-transform origin-top-left"
+                            className="absolute cursor-pointer will-change-transform origin-center"
                             style={{
-                                opacity: 0, // GSAP will set to 1
+                                opacity: 0,
                                 transform: `translate(${item.x}px, ${item.y}px)`,
                                 width: item.w,
                                 height: item.h,
