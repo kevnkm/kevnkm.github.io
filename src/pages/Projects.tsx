@@ -74,8 +74,11 @@ const Masonry = ({ items }: { items: typeof PROJECTS }) => {
     }, [items]);
 
     // Grid + Height
+    const isReady = imagesReady && width > 100;
+
+    // Compute grid only when ready
     const { grid, gridHeight } = useMemo(() => {
-        if (!width || !imagesReady) return { grid: [], gridHeight: 0 };
+        if (!isReady) return { grid: [], gridHeight: 0 };
 
         const colHeights = Array(columns).fill(0);
         const colWidth = width / columns;
@@ -91,11 +94,11 @@ const Masonry = ({ items }: { items: typeof PROJECTS }) => {
         });
 
         return { grid: built, gridHeight: Math.max(...colHeights) };
-    }, [width, columns, items, imagesReady]);
+    }, [width, columns, items, isReady]);
 
-    // GSAP Animations
+    // GSAP: Only run once layout is stable
     useLayoutEffect(() => {
-        if (!imagesReady || !grid.length) return;
+        if (!isReady || !grid.length) return;
 
         if (isInitialLoad) {
             grid.forEach((item) => {
@@ -106,26 +109,23 @@ const Masonry = ({ items }: { items: typeof PROJECTS }) => {
                     width: item.w,
                     height: item.h,
                     opacity: 1,
-                    scale: 1,
-                    filter: "blur(0px)",
                 });
             });
             setIsInitialLoad(false);
-            return;
-        }
-
-        grid.forEach((item) => {
-            gsap.to(`[data-key="${item.id}"]`, {
-                x: item.x,
-                y: item.y,
-                width: item.w,
-                height: item.h,
-                duration: 0.6,
-                ease: "power3.out",
-                overwrite: "auto",
+        } else {
+            grid.forEach((item) => {
+                gsap.to(`[data-key="${item.id}"]`, {
+                    x: item.x,
+                    y: item.y,
+                    width: item.w,
+                    height: item.h,
+                    duration: 0.6,
+                    ease: "power3.out",
+                    overwrite: "auto",
+                });
             });
-        });
-    }, [grid, imagesReady]);
+        }
+    }, [grid, isReady, isInitialLoad]);
 
     const handleHover = (id: string, enter: boolean) => {
         gsap.to(`[data-key="${id}"]`, {
@@ -145,23 +145,27 @@ const Masonry = ({ items }: { items: typeof PROJECTS }) => {
             <div
                 ref={containerRef}
                 className="relative w-full max-w-7xl mx-auto overflow-hidden"
-                style={{ height: imagesReady ? gridHeight : 600 }}
+                style={{ height: isReady ? gridHeight : 600 }}
             >
-                {!imagesReady && (
-                    <div className="fixed inset-0 flex items-center justify-center z-50">
+                {/* Loading State */}
+                {!isReady && (
+                    <div className="fixed inset-0 flex items-center justify-center z-50 bg-background">
                         <div className="flex flex-col items-center gap-3">
                             <Spinner />
                             <span className="text-sm text-muted-foreground">Loading projects...</span>
                         </div>
                     </div>
                 )}
-                {imagesReady &&
+
+                {/* Actual Grid — only render when ready */}
+                {isReady &&
                     grid.map((item) => (
                         <div
                             key={item.id}
                             data-key={item.id}
-                            className="absolute cursor-pointer will-change-transform"
+                            className="absolute cursor-pointer will-change-transform origin-top-left"
                             style={{
+                                opacity: 0, // GSAP will set to 1
                                 transform: `translate(${item.x}px, ${item.y}px)`,
                                 width: item.w,
                                 height: item.h,
@@ -173,7 +177,7 @@ const Masonry = ({ items }: { items: typeof PROJECTS }) => {
                             <div className="relative w-full h-full rounded-lg overflow-hidden shadow-xl border border-border">
                                 {item.img ? (
                                     <div
-                                        className="w-full h-full bg-cover bg-center"
+                                        className="w-full h-full bg-cover bg-center transition-transform duration-300 hover:scale-105"
                                         style={{ backgroundImage: `url(${item.img})` }}
                                     />
                                 ) : (
@@ -186,12 +190,7 @@ const Masonry = ({ items }: { items: typeof PROJECTS }) => {
                     ))}
             </div>
 
-            {/* MODAL */}
-            <ProjectDetail
-                open={open}
-                onOpenChange={setOpen}
-                project={selectedItem}
-            />
+            <ProjectDetail open={open} onOpenChange={setOpen} project={selectedItem} />
         </>
     );
 };
