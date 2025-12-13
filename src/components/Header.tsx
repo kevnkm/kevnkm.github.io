@@ -4,8 +4,8 @@ import PillNav from "./PillNav";
 import logo from "../images/kevnkm_icon.png";
 
 const menuItems = [
-    { label: "About", ariaLabel: "Welcome", href: "/" },
-    { label: "Projects", ariaLabel: "View my projects", href: "/projects" },
+    { label: "Work", ariaLabel: "View my projects", href: "/" },
+    { label: "About", ariaLabel: "About me", href: "/about" },
     { label: "Contact", ariaLabel: "Get in touch", href: "/contact" },
 ];
 

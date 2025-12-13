@@ -1,7 +1,7 @@
 import "./App.css";
 import { HashRouter, Routes, Route } from "react-router-dom";
+import Work from "./pages/Work";
 import About from "./pages/About";
-import Projects from "./pages/Projects";
 import Contact from "./pages/Contact";
 import Header from "./components/Header";
 import { ThemeProvider } from "./components/ThemeProvider";
@@ -13,8 +13,8 @@ function App() {
         <div className="flex flex-col min-h-screen">
           <Header />
           <Routes>
-            <Route path="/" element={<About />} />
-            <Route path="/projects" element={<Projects />} />
+            <Route path="/" element={<Work />} />
+            <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </div>

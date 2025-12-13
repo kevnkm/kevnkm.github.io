@@ -206,7 +206,7 @@ const Masonry = ({ items }: { items: typeof PROJECTS }) => {
     );
 };
 
-const Projects: React.FC = () => {
+const Work: React.FC = () => {
     return (
         <section className="min-h-screen pt-20 px-4 bg-background" id="projects">
             <div className="max-w-7xl mx-auto space-y-12">
@@ -216,4 +216,4 @@ const Projects: React.FC = () => {
     );
 };
 
-export default Projects;
+export default Work;
