@@ -17,10 +17,17 @@ export type Project = {
 
 export const PROJECTS: Project[] = [
   {
+    id: "zelf-note",
+    name: "ZelfNote",
+    description: "A note-taking app for problem solvers.",
+    url: "https://www.zelfnote.com",
+    height: 400,
+  },
+  {
     id: "huetopia",
     name: "Huetopia",
     description:
-      "An XR tabletop game that reimagines classic property-trading mechanics in an immersive environment.",
+      "A tabletop game in virtual reality that reimagines classic property-trading mechanics in an immersive environment.",
     img: huetopiaImage,
     url: "https://www.meta.com/experiences/26230755453235481/",
     height: 800,
@@ -35,12 +42,20 @@ export const PROJECTS: Project[] = [
     height: 500,
   },
   {
-    id: "arcadex",
-    name: "Arcadex",
+    id: "spiral-jump",
+    name: "Spiral Jump",
     description:
-      "A collection of retro-style arcade game in immersive environments, designed for quick play sessions and high replayability.",
+      "A casual game in mixed reality where players control a ball to pass through spiraling platforms while avoiding obstacles.",
     url: "https://www.cubeloom.com/",
-    height: 400,
+    height: 700,
+  },
+  {
+    id: "bounce-ball",
+    name: "Bounce Ball",
+    description:
+      "A casual game in mixed reality where players bounce a ball between platforms while avoiding obstacles.",
+    url: "https://www.cubeloom.com/",
+    height: 500,
   },
   {
     id: "labbit",
@@ -50,14 +65,6 @@ export const PROJECTS: Project[] = [
     img: labbitImage,
     url: "https://www.cubeloom.com/",
     height: 500,
-  },
-  {
-    id: "wildfire",
-    name: "Wildfire",
-    description:
-      "A fast-paced casual survival game focused on wildfire awareness and charity.",
-    url: "https://github.com/games4cause/wildfire/",
-    height: 400,
   },
   {
     id: "graphics",
