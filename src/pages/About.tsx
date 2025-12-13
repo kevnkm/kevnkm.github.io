@@ -38,7 +38,7 @@ const ImageComponent = ({
     </button>
 );
 
-export default function Home() {
+export default function About() {
     const isTouchDevice = useIsTouchDevice();
 
     // Timeline refs & state

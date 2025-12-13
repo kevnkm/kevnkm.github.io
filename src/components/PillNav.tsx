@@ -283,7 +283,7 @@ const PillNav: React.FC<PillNavProps> = ({
         {isRouterLink(items?.[0]?.href) ? (
           <Link
             to={items[0].href}
-            aria-label="Home"
+            aria-label="About"
             onMouseEnter={handleLogoEnter}
             role="menuitem"
             ref={el => {
@@ -301,7 +301,7 @@ const PillNav: React.FC<PillNavProps> = ({
         ) : (
           <a
             href={items?.[0]?.href || '#'}
-            aria-label="Home"
+            aria-label="About"
             onMouseEnter={handleLogoEnter}
             ref={el => {
               logoRef.current = el;
