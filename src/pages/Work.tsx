@@ -192,8 +192,10 @@ const Masonry = ({ items }: { items: typeof PROJECTS }) => {
                                         style={{ backgroundImage: `url(${item.img})` }}
                                     />
                                 ) : (
-                                    <div className="flex items-center justify-center h-full bg-muted text-muted-foreground text-xs uppercase">
-                                        No Image
+                                    <div className="flex items-center justify-center h-full bg-muted px-4 text-center">
+                                        <span className="text-sm font-medium text-muted-foreground">
+                                            {item.name}
+                                        </span>
                                     </div>
                                 )}
                             </div>
