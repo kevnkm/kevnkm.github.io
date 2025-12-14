@@ -165,7 +165,7 @@ export default function About() {
     return (
         <>
             {/* ===== HERO - FULL VIEWPORT CENTERED ===== */}
-            <section className="min-h-screen flex flex-col items-center justify-center px-6 text-center bg-background">
+            <section className="min-h-screen flex flex-col items-center justify-center px-6 pt-10 text-center bg-background">
                 <AnimatedContent
                     distance={50}
                     direction="vertical"
@@ -206,19 +206,8 @@ export default function About() {
                     Hi, I'm Kevin
                 </h1>
 
-                {/* Subtle down arrow */}
-                <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-                    <svg className="w-6 h-6 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                    </svg>
-                </div>
-            </section>
-
-            {/* ===== MAIN CONTENT BELOW THE FOLD ===== */}
-            <main className="bg-background">
-
                 {/* Bio */}
-                <section className="max-w-2xl mx-auto px-6 py-20 text-center">
+                <div className="max-w-2xl mx-auto px-6 pt-5 text-center">
                     <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
                         I'm an interactive designer and developer passionate about blending{" "}
                         <span className="text-foreground font-semibold">technology</span> and{" "}
@@ -226,8 +215,10 @@ export default function About() {
                         <br /><br />
                         For the past few years, I've been building VR/MR games, AI-powered productivity tools, and immersive learning experiences for research purposes.
                     </p>
-                </section>
+                </div>
+            </section>
 
+            <main className="bg-background">
                 {/* Timeline - 100% identical to your original Timeline page */}
                 <section ref={containerRef} className="max-w-4xl mx-auto text-foreground font-sans py-10">
                     <div ref={timelineRef} className="relative max-w-7xl mx-auto pb-20">
@@ -277,7 +268,7 @@ export default function About() {
                             Outside of work, I enjoy playing
                         </p>
                         <RotatingText
-                            texts={['basketball', '🎹', '🎸', '♟️', 'Smash Bros', 'board games', 'card games']}
+                            texts={['🏀', '🎹', '🎸', '♟️', 'Smash Bros', 'board games', 'card games']}
                             mainClassName="text-base md:text-lg  text-foreground overflow-hidden justify-center rounded-lg"
                             staggerFrom={"random"}
                             initial={{ y: "-100%" }}
