@@ -46,7 +46,6 @@ export const PROJECTS: Project[] = [
     name: "Spiral Jump",
     description:
       "A casual game in mixed reality where players control a ball to pass through spiraling platforms while avoiding obstacles.",
-    url: "https://www.cubeloom.com/",
     height: 700,
   },
   {
@@ -54,7 +53,6 @@ export const PROJECTS: Project[] = [
     name: "Bounce Ball",
     description:
       "A casual game in mixed reality where players bounce a ball between platforms while avoiding obstacles.",
-    url: "https://www.cubeloom.com/",
     height: 500,
   },
   {
@@ -63,7 +61,6 @@ export const PROJECTS: Project[] = [
     description:
       "A gamified learning app that helps users learn physics through interactive quizzes and experiments.",
     img: labbitImage,
-    url: "https://www.cubeloom.com/",
     height: 500,
   },
   {
