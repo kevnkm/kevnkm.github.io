@@ -5,6 +5,7 @@ import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } f
 import { Button } from "@/components/ui/button";
 import { FaMeta, FaGithub } from "react-icons/fa6";
 import { ExternalLink } from "lucide-react";
+import React from "react";
 
 export type ProjectDetailProps = {
     open: boolean;
@@ -17,51 +18,80 @@ export type ProjectDetailProps = {
     } | null;
 };
 
+function useIsDesktop() {
+    const [isDesktop, setIsDesktop] = React.useState(true);
+
+    React.useEffect(() => {
+        const mq = window.matchMedia("(min-width: 768px)");
+        const update = () => setIsDesktop(mq.matches);
+        update();
+        mq.addEventListener("change", update);
+        return () => mq.removeEventListener("change", update);
+    }, []);
+
+    return isDesktop;
+}
+
 export const ProjectDetail = ({ open, onOpenChange, project }: ProjectDetailProps) => {
-    const isDesktop = typeof window !== "undefined"
-        ? window.matchMedia("(min-width: 768px)").matches
-        : true;
+    const isDesktop = useIsDesktop();
+
     if (!project) return null;
 
-    const Icon = project.url?.includes("meta.com")
-        ? FaMeta
-        : project.url?.includes("github.com")
-            ? FaGithub
-            : ExternalLink;
+    const hasLink = Boolean(project.url);
 
-    return isDesktop ? (
-        <Dialog open={open} onOpenChange={onOpenChange}>
-            <DialogContent className="sm:max-w-xl gap-4">
-                <DialogHeader className="space-y-2">
-                    <DialogTitle className="text-xl">{project.name}</DialogTitle>
-                    {project.description && (
-                        <DialogDescription className="text-sm">
-                            {project.description}
-                        </DialogDescription>
-                    )}
-                </DialogHeader>
+    const Icon = hasLink
+        ? project.url!.includes("meta.com")
+            ? FaMeta
+            : project.url!.includes("github.com")
+                ? FaGithub
+                : ExternalLink
+        : ExternalLink;
 
-                <div className="space-y-6">
-                    {project.img && (
-                        <img
-                            src={project.img}
-                            alt={project.name}
-                            className="w-full rounded-lg aspect-video object-cover shadow-sm"
-                        />
-                    )}
-                    {project.url && (
-                        <Button
-                            className="w-full h-11 text-base font-medium gap-2"
-                            onClick={() => window.open(project.url, "_blank")}
-                        >
-                            <Icon className="w-4 h-4" />
-                            View Project
-                        </Button>
-                    )}
-                </div>
-            </DialogContent>
-        </Dialog>
-    ) : (
+    const Body = (
+        <div className="space-y-6">
+            {project.img && (
+                <img
+                    src={project.img}
+                    alt={project.name}
+                    className="w-full aspect-video rounded-lg object-cover shadow-sm"
+                />
+            )}
+
+            <Button
+                className="w-full h-11 text-base font-medium gap-2"
+                disabled={!hasLink}
+                onClick={
+                    hasLink ? () => window.open(project.url!, "_blank") : undefined
+                }
+            >
+                <Icon className="w-4 h-4" />
+                {hasLink ? "View Project" : "Coming Soon"}
+            </Button>
+        </div>
+    );
+
+    if (isDesktop) {
+        return (
+            <Dialog open={open} onOpenChange={onOpenChange}>
+                <DialogContent className="sm:max-w-xl gap-4">
+                    <DialogHeader className="space-y-2">
+                        <DialogTitle className="text-xl">
+                            {project.name}
+                        </DialogTitle>
+                        {project.description && (
+                            <DialogDescription className="text-sm">
+                                {project.description}
+                            </DialogDescription>
+                        )}
+                    </DialogHeader>
+
+                    {Body}
+                </DialogContent>
+            </Dialog>
+        );
+    }
+
+    return (
         <Drawer open={open} onOpenChange={onOpenChange}>
             <DrawerContent className="pb-8">
                 <DrawerHeader className="space-y-2 text-left">
@@ -73,24 +103,7 @@ export const ProjectDetail = ({ open, onOpenChange, project }: ProjectDetailProp
                     )}
                 </DrawerHeader>
 
-                <div className="space-y-6 px-6">
-                    {project.img && (
-                        <img
-                            src={project.img}
-                            alt={project.name}
-                            className="w-full rounded-lg aspect-video object-cover shadow-sm"
-                        />
-                    )}
-                    {project.url && (
-                        <Button
-                            className="w-full h-11 text-base font-medium gap-2"
-                            onClick={() => window.open(project.url, "_blank")}
-                        >
-                            <Icon className="w-4 h-4" />
-                            View Project
-                        </Button>
-                    )}
-                </div>
+                <div className="px-6">{Body}</div>
             </DrawerContent>
         </Drawer>
     );
