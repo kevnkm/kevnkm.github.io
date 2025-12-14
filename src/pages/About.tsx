@@ -277,7 +277,7 @@ export default function About() {
                             Outside of work, I enjoy playing
                         </p>
                         <RotatingText
-                            texts={['basketball', 'instruments🎹🎸', 'chess', 'Smash Bros', 'board games', 'card games']}
+                            texts={['basketball', '🎹', '🎸', '♟️', 'Smash Bros', 'board games', 'card games']}
                             mainClassName="text-base md:text-lg  text-foreground overflow-hidden justify-center rounded-lg"
                             staggerFrom={"random"}
                             initial={{ y: "-100%" }}
