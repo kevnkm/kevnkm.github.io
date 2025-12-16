@@ -3,7 +3,7 @@ import zelfImage from "@/images/zelf/zelf_1.gif";
 import huetopiaImage from "@/images/huetopia/huetopia_0.png";
 import specialRelativityImage from "@/images/specialrelativity/specialrelativity_13.gif";
 import rostersImage from "@/images/rosters/rosters_1.gif";
-import labbitImage from "@/images/labbit/labbit_1.png";
+import labbitImage from "@/images/labbit/labbit_2.png";
 import graphicsImage from "@/images/graphics/graphics_1.gif";
 import apparelDesignImage from "@/images/appareldesign/appareldesign_1.gif";
 import ocdSimulationImage from "@/images/ocdsimulation/ocd_1.gif";
