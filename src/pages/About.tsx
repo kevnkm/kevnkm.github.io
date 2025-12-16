@@ -81,10 +81,15 @@ export default function About() {
         {
             title: "Now",
             content: (
-                <p className="text-base font-normal text-muted-foreground mb-6">
-                    Focusing on building an AI-powered productivity platform that gamifies
-                    note-taking and problem-solving.
-                </p>
+                <div>
+                    <p className="text-base font-normal text-muted-foreground mb-6">
+                        Focusing on building an AI-powered productivity platform that gamifies
+                        note-taking and problem-solving.
+                    </p>
+                    <div className="flex flex-wrap justify-start gap-4">
+                        <ImageComponent item={getProjectById("zelf-note")!} onOpen={openDetail} />
+                    </div>
+                </div>
             ),
         },
         {
