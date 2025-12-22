@@ -1,5 +1,5 @@
 import "./App.css";
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Work from "./pages/Work";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -8,7 +8,7 @@ import { ThemeProvider } from "./components/ThemeProvider";
 
 function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
         <div className="flex flex-col min-h-screen">
           <Header />
@@ -19,7 +19,7 @@ function App() {
           </Routes>
         </div>
       </ThemeProvider>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 
