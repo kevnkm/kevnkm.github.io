@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Redirecting...</title>
+    <script>
+        // Preserve full path and query
+        const redirect =
+            location.pathname +
+            location.search +
+            location.hash;
+
+        // Redirect to SPA entry point
+        location.replace("/?redirect=" + encodeURIComponent(redirect));
+    </script>
+</head>
+
+<body></body>
+
+</html>
