@@ -57,16 +57,18 @@ export const ProjectDetail = ({ open, onOpenChange, project }: ProjectDetailProp
                 />
             )}
 
-            <Button
-                className="w-full h-11 text-base font-medium gap-2"
-                disabled={!hasLink}
-                onClick={
-                    hasLink ? () => window.open(project.url!, "_blank") : undefined
-                }
-            >
-                <Icon className="w-4 h-4" />
-                {hasLink ? "View Project" : "Coming Soon"}
-            </Button>
+            {project.description && (
+                <Button
+                    className="w-full h-11 text-base font-medium gap-2"
+                    disabled={!hasLink}
+                    onClick={
+                        hasLink ? () => window.open(project.url!, "_blank") : undefined
+                    }
+                >
+                    <Icon className="w-4 h-4" />
+                    {hasLink ? "View Project" : "Coming Soon"}
+                </Button>
+            )}
         </div>
     );
 
