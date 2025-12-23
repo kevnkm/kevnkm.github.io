@@ -15,7 +15,7 @@ export type Project = {
   img?: string;
   url?: string;
   height: number;
-  tags: string[];
+  tags?: string[];
 };
 
 export const PROJECTS: Project[] = [
