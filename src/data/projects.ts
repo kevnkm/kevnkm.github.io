@@ -27,7 +27,7 @@ export const PROJECTS: Project[] = [
     img: zelfImage,
     url: "https://www.zelfnote.com",
     height: 400,
-    tags: ["Web", "Mobile", "AI"],
+    tags: ["Web", "Mobile", "AI", "Education"],
   },
   {
     id: "huetopia",
