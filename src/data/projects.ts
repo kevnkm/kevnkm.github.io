@@ -15,6 +15,7 @@ export type Project = {
   img?: string;
   url?: string;
   height: number;
+  tags: string[];
 };
 
 export const PROJECTS: Project[] = [
@@ -26,6 +27,7 @@ export const PROJECTS: Project[] = [
     img: zelfImage,
     url: "https://www.zelfnote.com",
     height: 400,
+    tags: ["Web", "Mobile", "AI"],
   },
   {
     id: "huetopia",
@@ -35,6 +37,7 @@ export const PROJECTS: Project[] = [
     img: huetopiaImage,
     url: "https://www.meta.com/experiences/26230755453235481/",
     height: 800,
+    tags: ["VR", "Game"],
   },
   {
     id: "special-relativity",
@@ -44,6 +47,7 @@ export const PROJECTS: Project[] = [
     img: specialRelativityImage,
     url: "https://github.com/kevnkm/special-relativity",
     height: 500,
+    tags: ["VR", "Education"],
   },
   {
     id: "spiral-jump",
@@ -51,6 +55,7 @@ export const PROJECTS: Project[] = [
     description:
       "Casual game in mixed reality where players control a ball to pass through spiraling platforms while avoiding obstacles.",
     height: 700,
+    tags: ["VR", "Game"],
   },
   {
     id: "bounce-ball",
@@ -58,6 +63,7 @@ export const PROJECTS: Project[] = [
     description:
       "Casual game in mixed reality where players bounce a ball between platforms while avoiding obstacles.",
     height: 500,
+    tags: ["VR", "Game"],
   },
   {
     id: "labbit",
@@ -66,6 +72,7 @@ export const PROJECTS: Project[] = [
       "Gamified learning app that helps users learn physics through interactive quizzes and experiments.",
     img: labbitImage,
     height: 500,
+    tags: ["VR", "Education"],
   },
   {
     id: "graphics",
@@ -74,6 +81,7 @@ export const PROJECTS: Project[] = [
     img: graphicsImage,
     url: "https://kevnkm.github.io/graphics/",
     height: 400,
+    tags: ["Web", "Graphics"],
   },
   {
     id: "roster-tracker",
@@ -83,6 +91,7 @@ export const PROJECTS: Project[] = [
     img: rostersImage,
     url: "https://kevnkm.github.io/rosters/",
     height: 400,
+    tags: ["Web", "Data"],
   },
   {
     id: "apparel",
@@ -92,6 +101,7 @@ export const PROJECTS: Project[] = [
     img: apparelDesignImage,
     url: "https://github.com/kevnkm/apparel-design",
     height: 500,
+    tags: ["VR", "Education"],
   },
   {
     id: "ocd",
@@ -101,6 +111,7 @@ export const PROJECTS: Project[] = [
     img: ocdSimulationImage,
     url: "https://github.com/kevnkm/ocd-simulation",
     height: 600,
+    tags: ["VR", "Education"],
   },
 ];
 
