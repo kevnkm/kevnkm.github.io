@@ -3,6 +3,7 @@
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { FaMeta, FaGithub } from "react-icons/fa6";
 import { ExternalLink } from "lucide-react";
 import React from "react";
@@ -15,6 +16,7 @@ export type ProjectDetailProps = {
         description?: string;
         img?: string;
         url?: string;
+        tags?: string[];
     } | null;
 };
 
@@ -72,14 +74,32 @@ export const ProjectDetail = ({ open, onOpenChange, project }: ProjectDetailProp
         </div>
     );
 
+    const Tags = project.tags && project.tags.length > 0 && (
+        <div
+            className={`flex flex-wrap gap-2 ${isDesktop ? "justify-start" : "justify-center"
+                }`}
+        >
+            {project.tags.map((tag) => (
+                <Badge
+                    key={tag}
+                    variant="secondary"
+                    className="select-none"
+                >
+                    {tag}
+                </Badge>
+            ))}
+        </div>
+    );
+
     if (isDesktop) {
         return (
             <Dialog open={open} onOpenChange={onOpenChange}>
                 <DialogContent className="sm:max-w-xl gap-4">
-                    <DialogHeader className="space-y-2">
+                    <DialogHeader>
                         <DialogTitle className="text-xl">
                             {project.name}
                         </DialogTitle>
+                        {Tags}
                         {project.description && (
                             <DialogDescription className="text-sm">
                                 {project.description}
@@ -98,13 +118,13 @@ export const ProjectDetail = ({ open, onOpenChange, project }: ProjectDetailProp
             <DrawerContent className="pb-8">
                 <DrawerHeader className="space-y-2 text-left">
                     <DrawerTitle className="text-xl">{project.name}</DrawerTitle>
+                    {Tags}
                     {project.description && (
                         <DrawerDescription className="text-sm">
                             {project.description}
                         </DrawerDescription>
                     )}
                 </DrawerHeader>
-
                 <div className="px-6">{Body}</div>
             </DrawerContent>
         </Drawer>
