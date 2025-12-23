@@ -202,7 +202,7 @@ const Masonry = ({ items }: { items: typeof PROJECTS }) => {
                         <Badge
                             key={tag}
                             variant={selectedTags.includes(tag) ? "default" : "outline"}
-                            className="cursor-pointer hover:opacity-80 transition-opacity"
+                            className="cursor-pointer hover:opacity-80 transition-opacity select-none"
                             onClick={() => toggleTag(tag)}
                         >
                             {tag}
