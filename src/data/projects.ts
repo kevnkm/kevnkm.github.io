@@ -7,6 +7,7 @@ import labbitImage from "@/images/labbit/labbit_2.png";
 import graphicsImage from "@/images/graphics/graphics_1.gif";
 import apparelDesignImage from "@/images/appareldesign/appareldesign_1.gif";
 import ocdSimulationImage from "@/images/ocdsimulation/ocd_1.gif";
+import spiralJumpImage from "@/images/arcadex/spiraljump.gif";
 
 export type Project = {
   id: string;
@@ -54,6 +55,7 @@ export const PROJECTS: Project[] = [
     name: "Spiral Jump",
     description:
       "Casual game in mixed reality where players control a ball to pass through spiraling platforms while avoiding obstacles.",
+    img: spiralJumpImage,
     height: 700,
     tags: ["VR", "Game"],
   },
