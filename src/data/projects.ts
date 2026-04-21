@@ -8,6 +8,8 @@ import graphicsImage from "@/images/graphics/graphics_1.gif";
 import apparelDesignImage from "@/images/appareldesign/appareldesign_1.gif";
 import ocdSimulationImage from "@/images/ocdsimulation/ocd_1.gif";
 import spiralJumpImage from "@/images/arcadex/spiraljump.gif";
+import cubicfilmImage from "@/images/cubicfilm/cubicfilm_1.jpg";
+import gridnoteImage from "@/images/gridnote/gridnote_1.jpg";
 
 export type Project = {
   id: string;
@@ -20,6 +22,26 @@ export type Project = {
 };
 
 export const PROJECTS: Project[] = [
+  {
+    id: "cubicfilm",
+    name: "CubicFilm",
+    description:
+      "Vintage photo booth app that recreates the '4-cut' photo strip experience with curated filters and professional film-grade layouts.",
+    img: cubicfilmImage,
+    url: "https://www.cubicfilm.com",
+    height: 1000,
+    tags: ["Mobile"],
+  },
+  {
+    id: "gridnote",
+    name: "GridNote",
+    description:
+      "Mobile note-taking app with Wongoji manuscript paper interface.",
+    img: gridnoteImage,
+    url: "https://www.gridnote.co/",
+    height: 500,
+    tags: ["Mobile"],
+  },
   {
     id: "anote",
     name: "Anote",
