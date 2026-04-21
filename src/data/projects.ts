@@ -1,5 +1,5 @@
 // src/data/projects.ts
-import zelfImage from "@/images/zelf/zelf_1.gif";
+import anoteImage from "@/images/anote/anote_1.gif";
 import huetopiaImage from "@/images/huetopia/huetopia_0.png";
 import specialRelativityImage from "@/images/specialrelativity/specialrelativity_13.gif";
 import rostersImage from "@/images/rosters/rosters_1.gif";
@@ -21,12 +21,12 @@ export type Project = {
 
 export const PROJECTS: Project[] = [
   {
-    id: "zelf-note",
-    name: "ZelfNote",
+    id: "anote",
+    name: "Anote",
     description:
       "Note-taking app that streamlines problem solving and gamifies learning experience.",
-    img: zelfImage,
-    url: "https://www.zelfnote.com",
+    img: anoteImage,
+    url: "https://www.anote.page",
     height: 400,
     tags: ["Web", "Mobile", "AI", "Education"],
   },

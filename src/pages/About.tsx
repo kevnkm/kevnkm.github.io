@@ -87,7 +87,7 @@ export default function About() {
                         note-taking and problem-solving.
                     </p>
                     <div className="flex flex-wrap justify-start gap-4">
-                        <ImageComponent item={getProjectById("zelf-note")!} onOpen={openDetail} />
+                        <ImageComponent item={getProjectById("anote")!} onOpen={openDetail} />
                     </div>
                 </div>
             ),
